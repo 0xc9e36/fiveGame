@@ -1,0 +1,7 @@
+{
+  "require": {
+    "workerman/gateway-worker": "^3.0",
+    "clue/redis-react": "^1.0",
+    "workerman/mysql": "^1.0"
+  }
+}
