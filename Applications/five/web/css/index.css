@@ -1,0 +1,25 @@
+.main{
+    margin-top: 10px;
+    font-family: 微软雅黑;
+}
+
+.layui-list{
+    float: left;
+    height: 500px;
+    background: #f2f2f2;
+    border-right: 1px dashed slategray;
+}
+
+.layui-readme{
+    padding-left: 10px;
+    display: inline-block;
+    float: left;
+    width: 87%;
+    text-indent: 2em;
+}
+
+.layui-content-title{
+    text-align: center;
+    font-size: large;
+    font-weight: bolder;
+}

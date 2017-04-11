@@ -1,23 +1,42 @@
 body{
     font-family: 微软雅黑;
-    font-size: 13px;
+    font-size: 14px;
     margin: 0px;
     padding: 0px;
     margin-top: 1px;
+
 }
+
+#whole{
+    height: 1155px;
+    width: 100%;
+}
+
+.layui-bg-cyan{
+    width: 100%;
+    position: fixed;
+    top:0;
+    left: 0;
+    height: 45px;
+    line-height: 45px;
+    font-size: large;
+    color: yellow;
+    text-align: center;
+}
+
 .main{
     display: inline-block;
-    width: 68%;
-    height: 1100px;
+    width: 75%;
+    height: 1155px;
     overflow-y:scroll;
-    background: #05436C;
     float: left;
+    background: #5480AD;
 }
 .chat{
-    width: 32%;
-    height: 1000px;
-    overflow-y:scroll;
+    margin-top: 45px;
+    width: 25%;
     float: left;
+    background: #f2f2f2;
 }
 .main td{
     display: inline-block;
@@ -103,26 +122,30 @@ body{
 }
 
 
-.chat-list{
-    display: inline-block;
-    border: 1px solid #CCCCCC;
-    width: 68%;
-    background: #EEEEEE;
+.player-list{
+    height: 300px;
+    font-size: 15px;
+    border-bottom: 4px solid gray;
     border-radius : 3px;
-    float: left;
+    overflow-y: scroll;
 }
 
-.player-list{
-    border: 2px solid #CCCCCC;
-    display: inline-block;
-    width: 28%;
-    background: #EEEEEE;
+.chat-list{
+    border: 1px solid #CCCCCC;
+    height: 800px;
     border-radius : 3px;
-    float: right;
+    border-bottom: 4px solid gray;
+    border-radius : 3px;
+    overflow-y: scroll;
 }
+
 ul li{
     list-style: none;
-    color: #0b58a2;
+    color: black;
+}
+
+h4{
+    font-weight: bolder;
 }
 
 .chat-box{
@@ -152,7 +175,22 @@ ul li{
 
 .message{
     margin-top:50px;
-    width: 98%;
-    height: 100px;
+    width: 100%;
 }
 
+#speak{
+    position:fixed;
+    bottom:0;
+    right:0;
+}
+
+.danmu{
+    height:30px;
+    width: 500px;
+    line-height:30px;
+    position:absolute;
+    top:0;
+    left:95%;
+    font-weight:900;
+    font-size: 30px;
+}

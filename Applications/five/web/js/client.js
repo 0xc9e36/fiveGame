@@ -76,9 +76,8 @@ window.onload = function(){
 
         if (obj.status == 3) {//
             var msg = data.msg;
-            var r = confirm(msg + ',是否重新开始 ?');
-            if (r) {
-                competitor_id = null;
+            var r = confirm(msg);
+            if (r){
                 var data = '{"type":"start", "color":"'+color+'" ,"room_client_id":"'+room_client_id+'", "room_id":"'+room_id+'", "desk_id" : "'+desk_id+'"}';
                 console.log(data);
                 ws.send(data);

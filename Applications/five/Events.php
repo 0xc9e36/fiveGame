@@ -14,6 +14,9 @@
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
+//加载配置文件
+require_once 'class/config.class.php';
+
 /**
  * 用于检测业务代码死循环或者长时间阻塞等问题
  * 如果发现业务卡死，可以将下面declare打开（去掉//注释），并执行php start.php reload
@@ -34,7 +37,7 @@ class Events{
     public static $db = null;
 
     public static function onWorkerStart($businessWorker){
-        //单例对象
+        //数据库
         self::$db = new Workerman\MySQL\Connection('127.0.0.1', '3306', 'root', 'root', 'game');
     }
 
@@ -44,18 +47,19 @@ class Events{
     * @param mixed $message 具体消息
     */
    public static function onMessage($client_id, $message) {
-       
+
        // debug
        //echo "client:{$_SERVER['REMOTE_ADDR']}:{$_SERVER['REMOTE_PORT']} gateway:{$_SERVER['GATEWAY_ADDR']}:{$_SERVER['GATEWAY_PORT']}  client_id:$client_id session:".json_encode($_SESSION)." onMessage:".$message."\n";
 
-       // 数组格式
+       // 解析为数组格式
        $message_data = json_decode($message, true);
+
        if(!$message_data) return ;
 
        // 根据类型执行不同的逻辑
        switch($message_data['type']) {
 
-           //即时登录操作
+           //登录操作
            case 'login' :
 
                 //房间不合法
@@ -67,14 +71,14 @@ class Events{
                 $room_id = $message_data['room_id'];
                 $client_logo = $message_data['client_logo'];
                 $client_name = htmlspecialchars($message_data['client_name']);
+                var_dump($client_name);
                 $_SESSION['room_id'] = $room_id;
                 $_SESSION['client_name'] = $client_name;
                 $_SESSION['client_logo'] = $client_logo;
-
-                //房间
+                //连接标识,  1代表大厅
                 $_SESSION['is_room'] = 1;
 
-               //创建新用户
+               //数据库保存连接
                $insert_id = self::$db->insert('client')->cols([
                    'client_id'    =>    $client_id,
                    'client_name'  =>    $client_name,
@@ -82,15 +86,15 @@ class Events{
                ])->query();
 
                 //获取当前房间在线用户列表
-                $count = Gateway::getClientCountByGroup($room_id) + 1;
-                $clients_list = Gateway::getClientSessionsByGroup($room_id);
+                $count = Gateway::getClientCountByGroup($room_id) + 1;          //人数
+                $clients_list = Gateway::getClientSessionsByGroup($room_id);    //列表
                 foreach($clients_list as $tmp_client_id=>$item) {
                    $clients_list[$tmp_client_id] = $item['client_name'];
                 }
                 $clients_list[$client_id] = $client_name;
 
 
-                //查询当前游戏玩家
+                //当前房间正在进行游戏的玩家
                $white = self::$db
                    ->select("client_id, client_logo, client_name, desk_id,  'white' as color")
                    ->from('client')
@@ -105,27 +109,29 @@ class Events{
                    ->where("room_id = :room_id AND game_id <> '' AND black_id <> ''")
                    ->bindValues(['room_id' => $room_id])
                    ->query();
-                
-
                 $desk_status = array_merge($white, $black);
 
-                var_dump($desk_status);
-                //广播 client_name 进入房间
+                //debug
+                //var_dump($desk_status);
+
+
+                //大厅广播 xxx 进入房间
                 $message = [
                     'type'          =>      'login',
                     'client_id'     =>      $client_id,
                     'client_logo'   =>      $client_logo,
-                    'client_name'   =>  htmlspecialchars_decode($client_name),
+                    'client_name'   =>  $client_name,
                     'time'          =>  date('Y-m-d H:i:s'),
                     'count'         =>      $count,
                 ];
                Gateway::sendToGroup($room_id, json_encode($message));
-               Gateway::joinGroup($client_id, $room_id);
 
+
+               Gateway::joinGroup($client_id, $room_id);
                //发送在线用户列表
                $message['client_list'] = $clients_list;
                $message['count'] = $count;
-                //发送房间状态
+               //发送房间状态
                $message['desk_status'] = $desk_status;
                return Gateway::sendToCurrentClient(json_encode($message));
 
@@ -359,7 +365,7 @@ class Events{
                        $res = [
                            'status'    =>  3,  //游戏结束
                            'data'       =>[
-                               'msg'   =>  '游戏结束, '.$win.'获胜',
+                               'msg'   =>  '游戏结束, '.$win.'获胜, 是否重新开始游戏 ?',
                            ]
                        ];
                        Gateway::sendToCurrentClient(json_encode($res));
@@ -380,6 +386,8 @@ class Events{
        // debug
        echo "client:{$_SERVER['REMOTE_ADDR']}:{$_SERVER['REMOTE_PORT']} gateway:{$_SERVER['GATEWAY_ADDR']}:{$_SERVER['GATEWAY_PORT']}  client_id:$client_id onClose:''\n";
 
+       $client = self::$db->row("SELECT client_id, game_id FROM client WHERE client_id = '$client_id' OR game_id='$client_id'");
+
        // 只退出游戏
        if(isset($_SESSION['is_game']))
        {
@@ -389,8 +397,13 @@ class Events{
            } else if('black' == $_SESSION['color']){
                self::$db->update('desk')->cols(['black_id' => NULL])->where("black_id='$client_id'")->query();
            }
-           self::$db->update('client')->cols(['game_id' => NULL, 'move' => 0])->where("game_id='$client_id'")->query();
-           self::$db->delete('client')->where("game_id='$client_id' AND client_id = ''")->query();
+
+           if($client['client_id'] == ''){
+               self::$db->delete('client')->where("game_id='$client_id' AND client_id = ''")->query();
+           }else{
+               self::$db->update('client')->cols(['game_id' => NULL, 'move' => 0])->where("game_id='$client_id'")->query();
+           }
+
 
            //发送玩家逃跑信息
            $group = 'room'.$_SESSION['room_id'].'desk'.$_SESSION['desk_id'];
@@ -418,11 +431,6 @@ class Events{
            var_dump("房间id为".$_SESSION['room_id']);
            Gateway::sendToGroup($_SESSION['room_id'], json_encode($message));
 
-           //正在游戏
-           //$client = self::$db->select('game_id')->from('client')->where('client_id= :client_id')->bindValues(array('client_id'=> $client_id))->row();
-           //unset($_SESSION['desk_id']);
-           //unset($_SESSION['color']);
-           //unset($_SESSION['is_game']);
        }else if(isset($_SESSION['is_room'])) {
            var_dump('退出房间');
            $room_id = $_SESSION['room_id'];
@@ -433,8 +441,11 @@ class Events{
            else if('black' == $_SESSION['color'])
                self::$db->update('desk')->cols(['black_id' => NULL])->where("black_id='$client_id'")->query();
 
-           self::$db->update('client')->cols(['client_id' => NULL])->where("client_id='$client_id'")->query();
-           self::$db->delete('client')->where("client_id='$client_id' AND game_id = ''")->query();
+           if($client['game_id'] == ''){
+               self::$db->delete('client')->where("client_id='$client_id' AND game_id = ''")->query();
+           }else{
+               self::$db->update('client')->cols(['client_id' => NULL])->where("client_id='$client_id'")->query();
+           }
 
            $message = [
                'type'               =>      'logout',
