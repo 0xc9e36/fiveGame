@@ -195,7 +195,7 @@ class Events{
                    'type'=>'say',
                    'from_client_id'=>$client_id,
                    'from_client_name' =>$client_name,
-                   //'to_client_id'=>'all',
+                   //'to_client_id'=>'all',     //聊天对象
                    'content'=>nl2br(htmlspecialchars($message_data['content'])),
                    'time'=>date('Y-m-d H:i:s'),
                    'client_logo'    =>  $_SESSION['client_logo'],
@@ -206,21 +206,24 @@ class Events{
            //进入游戏
            case 'start' :
 
-               /*******先要检测用户是否合法********/
+               /*******先检测用户是否合法********/
+               // 非法请求
+               if(!isset($_SESSION['room_id'])) {
+                   throw new \Exception("房间号\$_SESSION['room_id']未设置. 客户端ip:{$_SERVER['REMOTE_ADDR']}");
+               }
 
-
+               //获取当前玩家信息
                $client = self::$db->select('client_name,client_logo')->from('client')->where('client_id= :client_id')->bindValues(array('client_id'=> $message_data['room_client_id']))->row();
 
-
-               var_dump($client_id);
                $color = $message_data['color'].'_id';
                $room_id = $message_data['room_id'];
                $desk_id = $message_data['desk_id'];
+               //sessoion 记录玩家信息
                $_SESSION['color'] = $message_data['color'];
                $_SESSION['room_id'] = $room_id;
                $_SESSION['desk_id'] = $desk_id;
 
-               //加入分组
+               //加入两人游戏分组
                Gateway::joinGroup($client_id, 'room'.$room_id.'desk'.$desk_id);
 
                //游戏标识
@@ -248,12 +251,14 @@ class Events{
                        ->row();
                }
 
-               var_dump($competitor);
+               //debug
+               //var_dump($competitor);
+
                $res = [
-                   'status'    =>  0,  //未进行游戏
+                   'status'    =>  0,  //发送玩家信息
                    'msg'   =>  '',
                    'data'  =>  [
-                       'color'      =>  $message_data['color'],
+                       'color'      =>  $color,
                        'client_id'  =>  $client_id,
                        'room_client_id'  =>  $message_data['room_client_id'],
                        'client_name' => $client['client_name'],
@@ -263,7 +268,7 @@ class Events{
                ];
                Gateway::sendToCurrentClient(json_encode($res));
 
-               // 更新
+               // 更新房间棋桌
                self::$db->update('client')->cols(array('game_id'))->where("client_id='{$message_data['room_client_id']}'")->bindValue('game_id', $client_id)->query();
 
                //对手匹配 在线

@@ -7777,3 +7777,6 @@ Stack trace:
 2017-04-11 17:32:19 pid:15140 Workerman[start.php] start in DEBUG mode
 2017-04-11 22:59:12 pid:15140 Workerman[start.php] Stopping ...
 2017-04-11 22:59:13 pid:15140 Workerman[start.php] has been stopped
+2017-04-12 08:53:12 pid:2948 Workerman[start.php] start in DEBUG mode
+2017-04-12 23:28:22 pid:2948 Workerman[start.php] Stopping ...
+2017-04-12 23:28:25 pid:2948 Workerman[start.php] has been stopped

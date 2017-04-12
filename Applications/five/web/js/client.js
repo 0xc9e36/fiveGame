@@ -4,8 +4,26 @@
 window.onload = function(){
 
     var room_client_id, room_id, desk_id, client_id, color, competitor_id;
-    ws = new WebSocket('ws://'+ip);
-    ws.onopen = function () {
+    var chessboard = document.getElementById('chessboard');
+    var context = chessboard.getContext('2d');
+    context.strokeStyle = "#BFBFBF";
+
+    connect();
+
+    //websocket连接
+    function connect(){
+        // 创建websocket
+        ws = new WebSocket('ws://'+ip);
+
+        // 当socket连接打开时
+        ws.onopen = open;
+
+        // socket接收服务端消息
+        ws.onmessage = onmessage;
+
+    }
+
+    function open() {
         room_client_id = getQueryString("client_id");
         room_id = getQueryString("room_id");
         desk_id = getQueryString("desk_id");
@@ -15,34 +33,20 @@ window.onload = function(){
         console.log("websocket握手成功，发送登录数据:"+data);
         ws.send(data);
     }
-    var chessboard = document.getElementById('chessboard');
-    var context = chessboard.getContext('2d');
-    context.strokeStyle = "#BFBFBF";
 
-    //棋盘
-    drawChessBoard();
-
-    //点击落子
-    chessboard.onclick = function(e){
-        var x = e.offsetX;
-        var y = e.offsetY;
-        var i = Math.floor(x / 40);
-        var j = Math.floor(y / 40);
-        var val = i + "|" + j;
-        var send = '{"type":"play","status":"2","color":"'+color+'", "data":"'+val+'", "competitor":"'+competitor_id+'"}';
-        console.log(send);
-        ws.send(send);
-    }
-    ws.onmessage = function (e) {
+    function onmessage(e) {
         //转为json对象
         var obj = eval('(' + e.data + ')');
         var data = obj.data;
         console.log(data);
         if (obj.status == 0) {//初始化名字
-            $('h3').html('当前玩家 : '+data.client_name);
+            $('.cur_name').html(data.client_name);
+            $('.detail-left').css('background-image','url('+data.client_logo+')');
             //当前玩家信息设置
+
             setPlayer(data.client_name, data.client_logo, data.color);
             console.log(data.competitor);
+
             if(data.competitor){
                 var competitor = data.competitor;
                 //设置对手玩家信息
@@ -117,6 +121,21 @@ window.onload = function(){
     };
 
     //棋盘
+    drawChessBoard();
+
+    //点击落子
+    chessboard.onclick = function(e){
+        var x = e.offsetX;
+        var y = e.offsetY;
+        var i = Math.floor(x / 40);
+        var j = Math.floor(y / 40);
+        var val = i + "|" + j;
+        var send = '{"type":"play","status":"2","color":"'+color+'", "data":"'+val+'", "competitor":"'+competitor_id+'"}';
+        console.log(send);
+        ws.send(send);
+    }
+
+    //棋盘
     function drawChessBoard(){
         for(var i = 0; i < 15; i++){
             //先画竖线
@@ -151,8 +170,10 @@ window.onload = function(){
     }
 
     function setPlayer(client_name, client_logn, color){
-        var box = color == 'white' ? $('.player1') : $('.player2');
-        box.find('p').html('<image src="'+client_logn+'">'+client_name);
+        var curBox = color == 'white' ? $('.white') : $('.black');
+        var src = color == 'white' ? '../images/white-chess.png' : '../images/black-chess.png';
+        curBox.find('img').attr('src', src);
+        curBox.find('.client_name').html(client_name);
     }
 
     //获取url参数
