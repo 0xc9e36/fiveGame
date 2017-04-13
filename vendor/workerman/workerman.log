@@ -7780,3 +7780,589 @@ Stack trace:
 2017-04-12 08:53:12 pid:2948 Workerman[start.php] start in DEBUG mode
 2017-04-12 23:28:22 pid:2948 Workerman[start.php] Stopping ...
 2017-04-12 23:28:25 pid:2948 Workerman[start.php] has been stopped
+2017-04-12 23:30:09 pid:18942 Workerman[start.php] start in DEBUG mode
+2017-04-12 23:32:45 pid:18945 exception 'Exception' with message '房间号$_SESSION['room_id']未设置. 客户端ip:127.0.0.1' in /var/www/html/game/Applications/five/Events.php:212
+Stack trace:
+#0 [internal function]: Events::onMessage('7f0000010b57000...', '{"type":"start"...')
+#1 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(369): call_user_func('Events::onMessa...', '7f0000010b57000...', '{"type":"start"...')
+#2 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#3 /var/www/html/game/vendor/workerman/workerman/Connection/TcpConnection.php(480): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #55, Object(Workerman\Events\React\ExtEventLoop))
+#5 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(319): call_user_func(Array, Resource id #55, Object(Workerman\Events\React\ExtEventLoop))
+#6 [internal function]: React\EventLoop\ExtEventLoop->React\EventLoop\{closure}(Resource id #55, 2, NULL)
+#7 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(205): EventBase->loop(1)
+#8 /var/www/html/game/vendor/workerman/workerman/Events/React.php(122): React\EventLoop\ExtEventLoop->run()
+#9 /var/www/html/game/vendor/workerman/workerman/Worker.php(1537): Workerman\Events\React->loop()
+#10 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(183): Workerman\Worker->run()
+#11 /var/www/html/game/vendor/workerman/workerman/Worker.php(936): GatewayWorker\BusinessWorker->run()
+#12 /var/www/html/game/vendor/workerman/workerman/Worker.php(899): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#13 /var/www/html/game/vendor/workerman/workerman/Worker.php(431): Workerman\Worker::forkWorkers()
+#14 /var/www/html/game/start.php(37): Workerman\Worker::runAll()
+#15 {main}
+2017-04-12 23:32:45 pid:18945 WORKER EXIT UNEXPECTED 
+2017-04-12 23:32:45 pid:18942 worker[YourAppBusinessWorker:18945] exit with status 64000
+2017-04-12 23:33:07 pid:18946 exception 'Exception' with message '房间号$_SESSION['room_id']未设置. 客户端ip:127.0.0.1' in /var/www/html/game/Applications/five/Events.php:212
+Stack trace:
+#0 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"start"...')
+#1 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(369): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"start"...')
+#2 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#3 /var/www/html/game/vendor/workerman/workerman/Connection/TcpConnection.php(480): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #54, Object(Workerman\Events\React\ExtEventLoop))
+#5 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(319): call_user_func(Array, Resource id #54, Object(Workerman\Events\React\ExtEventLoop))
+#6 [internal function]: React\EventLoop\ExtEventLoop->React\EventLoop\{closure}(Resource id #54, 2, NULL)
+#7 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(205): EventBase->loop(1)
+#8 /var/www/html/game/vendor/workerman/workerman/Events/React.php(122): React\EventLoop\ExtEventLoop->run()
+#9 /var/www/html/game/vendor/workerman/workerman/Worker.php(1537): Workerman\Events\React->loop()
+#10 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(183): Workerman\Worker->run()
+#11 /var/www/html/game/vendor/workerman/workerman/Worker.php(936): GatewayWorker\BusinessWorker->run()
+#12 /var/www/html/game/vendor/workerman/workerman/Worker.php(899): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#13 /var/www/html/game/vendor/workerman/workerman/Worker.php(431): Workerman\Worker::forkWorkers()
+#14 /var/www/html/game/start.php(37): Workerman\Worker::runAll()
+#15 {main}
+2017-04-12 23:33:07 pid:18946 WORKER EXIT UNEXPECTED 
+2017-04-12 23:33:07 pid:18942 worker[YourAppBusinessWorker:18946] exit with status 64000
+2017-04-12 23:33:27 pid:19496 exception 'Exception' with message '房间号$_SESSION['room_id']未设置. 客户端ip:127.0.0.1' in /var/www/html/game/Applications/five/Events.php:212
+Stack trace:
+#0 [internal function]: Events::onMessage('7f0000010b55000...', '{"type":"start"...')
+#1 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(369): call_user_func('Events::onMessa...', '7f0000010b55000...', '{"type":"start"...')
+#2 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#3 /var/www/html/game/vendor/workerman/workerman/Connection/TcpConnection.php(480): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #58, Object(Workerman\Events\React\ExtEventLoop))
+#5 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(319): call_user_func(Array, Resource id #58, Object(Workerman\Events\React\ExtEventLoop))
+#6 [internal function]: React\EventLoop\ExtEventLoop->React\EventLoop\{closure}(Resource id #58, 2, NULL)
+#7 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(205): EventBase->loop(1)
+#8 /var/www/html/game/vendor/workerman/workerman/Events/React.php(122): React\EventLoop\ExtEventLoop->run()
+#9 /var/www/html/game/vendor/workerman/workerman/Worker.php(1537): Workerman\Events\React->loop()
+#10 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(183): Workerman\Worker->run()
+#11 /var/www/html/game/vendor/workerman/workerman/Worker.php(936): GatewayWorker\BusinessWorker->run()
+#12 /var/www/html/game/vendor/workerman/workerman/Worker.php(899): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#13 /var/www/html/game/vendor/workerman/workerman/Worker.php(1052): Workerman\Worker::forkWorkers()
+#14 /var/www/html/game/vendor/workerman/workerman/Worker.php(434): Workerman\Worker::monitorWorkers()
+#15 /var/www/html/game/start.php(37): Workerman\Worker::runAll()
+#16 {main}
+2017-04-12 23:33:27 pid:19496 WORKER EXIT UNEXPECTED 
+2017-04-12 23:33:27 pid:18942 worker[YourAppBusinessWorker:19496] exit with status 64000
+2017-04-13 09:43:27 pid:3503 Workerman[start.php] start in DEBUG mode
+2017-04-13 09:43:33 pid:3536 Workerman[start.php] start in DEBUG mode
+2017-04-13 09:44:42 pid:3540 exception 'Exception' with message '房间号$_SESSION['room_id']未设置. 客户端ip:127.0.0.1' in /var/www/html/game/Applications/five/Events.php:212
+Stack trace:
+#0 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"start"...')
+#1 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(369): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"start"...')
+#2 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#3 /var/www/html/game/vendor/workerman/workerman/Connection/TcpConnection.php(480): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #57, Object(Workerman\Events\React\ExtEventLoop))
+#5 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(319): call_user_func(Array, Resource id #57, Object(Workerman\Events\React\ExtEventLoop))
+#6 [internal function]: React\EventLoop\ExtEventLoop->React\EventLoop\{closure}(Resource id #57, 2, NULL)
+#7 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(205): EventBase->loop(1)
+#8 /var/www/html/game/vendor/workerman/workerman/Events/React.php(122): React\EventLoop\ExtEventLoop->run()
+#9 /var/www/html/game/vendor/workerman/workerman/Worker.php(1537): Workerman\Events\React->loop()
+#10 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(183): Workerman\Worker->run()
+#11 /var/www/html/game/vendor/workerman/workerman/Worker.php(936): GatewayWorker\BusinessWorker->run()
+#12 /var/www/html/game/vendor/workerman/workerman/Worker.php(899): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#13 /var/www/html/game/vendor/workerman/workerman/Worker.php(431): Workerman\Worker::forkWorkers()
+#14 /var/www/html/game/start.php(37): Workerman\Worker::runAll()
+#15 {main}
+2017-04-13 09:44:42 pid:3540 WORKER EXIT UNEXPECTED 
+2017-04-13 09:44:42 pid:3536 worker[YourAppBusinessWorker:3540] exit with status 64000
+2017-04-13 09:44:45 pid:3539 exception 'Exception' with message '房间号$_SESSION['room_id']未设置. 客户端ip:127.0.0.1' in /var/www/html/game/Applications/five/Events.php:212
+Stack trace:
+#0 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"start"...')
+#1 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(369): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"start"...')
+#2 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#3 /var/www/html/game/vendor/workerman/workerman/Connection/TcpConnection.php(480): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #57, Object(Workerman\Events\React\ExtEventLoop))
+#5 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(319): call_user_func(Array, Resource id #57, Object(Workerman\Events\React\ExtEventLoop))
+#6 [internal function]: React\EventLoop\ExtEventLoop->React\EventLoop\{closure}(Resource id #57, 2, NULL)
+#7 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(205): EventBase->loop(1)
+#8 /var/www/html/game/vendor/workerman/workerman/Events/React.php(122): React\EventLoop\ExtEventLoop->run()
+#9 /var/www/html/game/vendor/workerman/workerman/Worker.php(1537): Workerman\Events\React->loop()
+#10 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(183): Workerman\Worker->run()
+#11 /var/www/html/game/vendor/workerman/workerman/Worker.php(936): GatewayWorker\BusinessWorker->run()
+#12 /var/www/html/game/vendor/workerman/workerman/Worker.php(899): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#13 /var/www/html/game/vendor/workerman/workerman/Worker.php(431): Workerman\Worker::forkWorkers()
+#14 /var/www/html/game/start.php(37): Workerman\Worker::runAll()
+#15 {main}
+2017-04-13 09:44:45 pid:3539 WORKER EXIT UNEXPECTED 
+2017-04-13 09:44:45 pid:3536 worker[YourAppBusinessWorker:3539] exit with status 64000
+2017-04-13 12:04:43 pid:3538 exception 'Exception' with message '房间号$_SESSION['room_id']未设置. 客户端ip:127.0.0.1' in /var/www/html/game/Applications/five/Events.php:212
+Stack trace:
+#0 [internal function]: Events::onMessage('7f0000010b57000...', '{"type":"start"...')
+#1 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(369): call_user_func('Events::onMessa...', '7f0000010b57000...', '{"type":"start"...')
+#2 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#3 /var/www/html/game/vendor/workerman/workerman/Connection/TcpConnection.php(480): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #56, Object(Workerman\Events\React\ExtEventLoop))
+#5 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(319): call_user_func(Array, Resource id #56, Object(Workerman\Events\React\ExtEventLoop))
+#6 [internal function]: React\EventLoop\ExtEventLoop->React\EventLoop\{closure}(Resource id #56, 2, NULL)
+#7 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(205): EventBase->loop(1)
+#8 /var/www/html/game/vendor/workerman/workerman/Events/React.php(122): React\EventLoop\ExtEventLoop->run()
+#9 /var/www/html/game/vendor/workerman/workerman/Worker.php(1537): Workerman\Events\React->loop()
+#10 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(183): Workerman\Worker->run()
+#11 /var/www/html/game/vendor/workerman/workerman/Worker.php(936): GatewayWorker\BusinessWorker->run()
+#12 /var/www/html/game/vendor/workerman/workerman/Worker.php(899): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#13 /var/www/html/game/vendor/workerman/workerman/Worker.php(431): Workerman\Worker::forkWorkers()
+#14 /var/www/html/game/start.php(37): Workerman\Worker::runAll()
+#15 {main}
+2017-04-13 12:04:43 pid:3538 WORKER EXIT UNEXPECTED 
+2017-04-13 12:04:43 pid:3536 worker[YourAppBusinessWorker:3538] exit with status 64000
+2017-04-13 12:04:45 pid:3806 exception 'Exception' with message '房间号$_SESSION['room_id']未设置. 客户端ip:127.0.0.1' in /var/www/html/game/Applications/five/Events.php:212
+Stack trace:
+#0 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"start"...')
+#1 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(369): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"start"...')
+#2 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#3 /var/www/html/game/vendor/workerman/workerman/Connection/TcpConnection.php(480): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #58, Object(Workerman\Events\React\ExtEventLoop))
+#5 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(319): call_user_func(Array, Resource id #58, Object(Workerman\Events\React\ExtEventLoop))
+#6 [internal function]: React\EventLoop\ExtEventLoop->React\EventLoop\{closure}(Resource id #58, 2, NULL)
+#7 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(205): EventBase->loop(1)
+#8 /var/www/html/game/vendor/workerman/workerman/Events/React.php(122): React\EventLoop\ExtEventLoop->run()
+#9 /var/www/html/game/vendor/workerman/workerman/Worker.php(1537): Workerman\Events\React->loop()
+#10 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(183): Workerman\Worker->run()
+#11 /var/www/html/game/vendor/workerman/workerman/Worker.php(936): GatewayWorker\BusinessWorker->run()
+#12 /var/www/html/game/vendor/workerman/workerman/Worker.php(899): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#13 /var/www/html/game/vendor/workerman/workerman/Worker.php(1052): Workerman\Worker::forkWorkers()
+#14 /var/www/html/game/vendor/workerman/workerman/Worker.php(434): Workerman\Worker::monitorWorkers()
+#15 /var/www/html/game/start.php(37): Workerman\Worker::runAll()
+#16 {main}
+2017-04-13 12:04:45 pid:3806 WORKER EXIT UNEXPECTED 
+2017-04-13 12:04:45 pid:3536 worker[YourAppBusinessWorker:3806] exit with status 64000
+2017-04-13 12:08:52 pid:3816 exception 'Exception' with message '房间号$_SESSION['room_id']未设置. 客户端ip:127.0.0.1' in /var/www/html/game/Applications/five/Events.php:212
+Stack trace:
+#0 [internal function]: Events::onMessage('7f0000010b56000...', '{"type":"start"...')
+#1 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(369): call_user_func('Events::onMessa...', '7f0000010b56000...', '{"type":"start"...')
+#2 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#3 /var/www/html/game/vendor/workerman/workerman/Connection/TcpConnection.php(480): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #57, Object(Workerman\Events\React\ExtEventLoop))
+#5 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(319): call_user_func(Array, Resource id #57, Object(Workerman\Events\React\ExtEventLoop))
+#6 [internal function]: React\EventLoop\ExtEventLoop->React\EventLoop\{closure}(Resource id #57, 2, NULL)
+#7 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(205): EventBase->loop(1)
+#8 /var/www/html/game/vendor/workerman/workerman/Events/React.php(122): React\EventLoop\ExtEventLoop->run()
+#9 /var/www/html/game/vendor/workerman/workerman/Worker.php(1537): Workerman\Events\React->loop()
+#10 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(183): Workerman\Worker->run()
+#11 /var/www/html/game/vendor/workerman/workerman/Worker.php(936): GatewayWorker\BusinessWorker->run()
+#12 /var/www/html/game/vendor/workerman/workerman/Worker.php(899): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#13 /var/www/html/game/vendor/workerman/workerman/Worker.php(1052): Workerman\Worker::forkWorkers()
+#14 /var/www/html/game/vendor/workerman/workerman/Worker.php(434): Workerman\Worker::monitorWorkers()
+#15 /var/www/html/game/start.php(37): Workerman\Worker::runAll()
+#16 {main}
+2017-04-13 12:08:52 pid:3816 WORKER EXIT UNEXPECTED 
+2017-04-13 12:08:52 pid:3536 worker[YourAppBusinessWorker:3816] exit with status 64000
+2017-04-13 12:10:33 pid:25313 exception 'Exception' with message '房间号$_SESSION['room_id']未设置. 客户端ip:127.0.0.1' in /var/www/html/game/Applications/five/Events.php:212
+Stack trace:
+#0 [internal function]: Events::onMessage('7f0000010b55000...', '{"type":"start"...')
+#1 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(369): call_user_func('Events::onMessa...', '7f0000010b55000...', '{"type":"start"...')
+#2 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#3 /var/www/html/game/vendor/workerman/workerman/Connection/TcpConnection.php(480): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #62, Object(Workerman\Events\React\ExtEventLoop))
+#5 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(319): call_user_func(Array, Resource id #62, Object(Workerman\Events\React\ExtEventLoop))
+#6 [internal function]: React\EventLoop\ExtEventLoop->React\EventLoop\{closure}(Resource id #62, 2, NULL)
+#7 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(205): EventBase->loop(1)
+#8 /var/www/html/game/vendor/workerman/workerman/Events/React.php(122): React\EventLoop\ExtEventLoop->run()
+#9 /var/www/html/game/vendor/workerman/workerman/Worker.php(1537): Workerman\Events\React->loop()
+#10 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(183): Workerman\Worker->run()
+#11 /var/www/html/game/vendor/workerman/workerman/Worker.php(936): GatewayWorker\BusinessWorker->run()
+#12 /var/www/html/game/vendor/workerman/workerman/Worker.php(899): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#13 /var/www/html/game/vendor/workerman/workerman/Worker.php(1052): Workerman\Worker::forkWorkers()
+#14 /var/www/html/game/vendor/workerman/workerman/Worker.php(434): Workerman\Worker::monitorWorkers()
+#15 /var/www/html/game/start.php(37): Workerman\Worker::runAll()
+#16 {main}
+2017-04-13 12:10:33 pid:25313 WORKER EXIT UNEXPECTED 
+2017-04-13 12:10:33 pid:3536 worker[YourAppBusinessWorker:25313] exit with status 64000
+2017-04-13 12:11:15 pid:25308 exception 'Exception' with message '房间号$_SESSION['room_id']未设置. 客户端ip:127.0.0.1' in /var/www/html/game/Applications/five/Events.php:212
+Stack trace:
+#0 [internal function]: Events::onMessage('7f0000010b55000...', '{"type":"start"...')
+#1 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(369): call_user_func('Events::onMessa...', '7f0000010b55000...', '{"type":"start"...')
+#2 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#3 /var/www/html/game/vendor/workerman/workerman/Connection/TcpConnection.php(480): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #61, Object(Workerman\Events\React\ExtEventLoop))
+#5 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(319): call_user_func(Array, Resource id #61, Object(Workerman\Events\React\ExtEventLoop))
+#6 [internal function]: React\EventLoop\ExtEventLoop->React\EventLoop\{closure}(Resource id #61, 2, NULL)
+#7 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(205): EventBase->loop(1)
+#8 /var/www/html/game/vendor/workerman/workerman/Events/React.php(122): React\EventLoop\ExtEventLoop->run()
+#9 /var/www/html/game/vendor/workerman/workerman/Worker.php(1537): Workerman\Events\React->loop()
+#10 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(183): Workerman\Worker->run()
+#11 /var/www/html/game/vendor/workerman/workerman/Worker.php(936): GatewayWorker\BusinessWorker->run()
+#12 /var/www/html/game/vendor/workerman/workerman/Worker.php(899): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#13 /var/www/html/game/vendor/workerman/workerman/Worker.php(1052): Workerman\Worker::forkWorkers()
+#14 /var/www/html/game/vendor/workerman/workerman/Worker.php(434): Workerman\Worker::monitorWorkers()
+#15 /var/www/html/game/start.php(37): Workerman\Worker::runAll()
+#16 {main}
+2017-04-13 12:11:15 pid:25308 WORKER EXIT UNEXPECTED 
+2017-04-13 12:11:16 pid:3536 worker[YourAppBusinessWorker:25308] exit with status 64000
+2017-04-13 12:11:23 pid:3537 exception 'Exception' with message '房间号$_SESSION['room_id']未设置. 客户端ip:127.0.0.1' in /var/www/html/game/Applications/five/Events.php:212
+Stack trace:
+#0 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"start"...')
+#1 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(369): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"start"...')
+#2 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#3 /var/www/html/game/vendor/workerman/workerman/Connection/TcpConnection.php(480): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #57, Object(Workerman\Events\React\ExtEventLoop))
+#5 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(319): call_user_func(Array, Resource id #57, Object(Workerman\Events\React\ExtEventLoop))
+#6 [internal function]: React\EventLoop\ExtEventLoop->React\EventLoop\{closure}(Resource id #57, 2, NULL)
+#7 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(205): EventBase->loop(1)
+#8 /var/www/html/game/vendor/workerman/workerman/Events/React.php(122): React\EventLoop\ExtEventLoop->run()
+#9 /var/www/html/game/vendor/workerman/workerman/Worker.php(1537): Workerman\Events\React->loop()
+#10 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(183): Workerman\Worker->run()
+#11 /var/www/html/game/vendor/workerman/workerman/Worker.php(936): GatewayWorker\BusinessWorker->run()
+#12 /var/www/html/game/vendor/workerman/workerman/Worker.php(899): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#13 /var/www/html/game/vendor/workerman/workerman/Worker.php(431): Workerman\Worker::forkWorkers()
+#14 /var/www/html/game/start.php(37): Workerman\Worker::runAll()
+#15 {main}
+2017-04-13 12:11:23 pid:3537 WORKER EXIT UNEXPECTED 
+2017-04-13 12:11:23 pid:3536 worker[YourAppBusinessWorker:3537] exit with status 64000
+2017-04-13 12:12:07 pid:26336 exception 'Exception' with message '房间号$_SESSION['room_id']未设置. 客户端ip:127.0.0.1' in /var/www/html/game/Applications/five/Events.php:212
+Stack trace:
+#0 [internal function]: Events::onMessage('7f0000010b57000...', '{"type":"start"...')
+#1 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(369): call_user_func('Events::onMessa...', '7f0000010b57000...', '{"type":"start"...')
+#2 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#3 /var/www/html/game/vendor/workerman/workerman/Connection/TcpConnection.php(480): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #62, Object(Workerman\Events\React\ExtEventLoop))
+#5 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(319): call_user_func(Array, Resource id #62, Object(Workerman\Events\React\ExtEventLoop))
+#6 [internal function]: React\EventLoop\ExtEventLoop->React\EventLoop\{closure}(Resource id #62, 2, NULL)
+#7 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(205): EventBase->loop(1)
+#8 /var/www/html/game/vendor/workerman/workerman/Events/React.php(122): React\EventLoop\ExtEventLoop->run()
+#9 /var/www/html/game/vendor/workerman/workerman/Worker.php(1537): Workerman\Events\React->loop()
+#10 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(183): Workerman\Worker->run()
+#11 /var/www/html/game/vendor/workerman/workerman/Worker.php(936): GatewayWorker\BusinessWorker->run()
+#12 /var/www/html/game/vendor/workerman/workerman/Worker.php(899): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#13 /var/www/html/game/vendor/workerman/workerman/Worker.php(1052): Workerman\Worker::forkWorkers()
+#14 /var/www/html/game/vendor/workerman/workerman/Worker.php(434): Workerman\Worker::monitorWorkers()
+#15 /var/www/html/game/start.php(37): Workerman\Worker::runAll()
+#16 {main}
+2017-04-13 12:12:07 pid:26336 WORKER EXIT UNEXPECTED 
+2017-04-13 12:12:07 pid:3536 worker[YourAppBusinessWorker:26336] exit with status 64000
+2017-04-13 12:12:17 pid:26028 exception 'Exception' with message '房间号$_SESSION['room_id']未设置. 客户端ip:127.0.0.1' in /var/www/html/game/Applications/five/Events.php:212
+Stack trace:
+#0 [internal function]: Events::onMessage('7f0000010b56000...', '{"type":"start"...')
+#1 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(369): call_user_func('Events::onMessa...', '7f0000010b56000...', '{"type":"start"...')
+#2 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#3 /var/www/html/game/vendor/workerman/workerman/Connection/TcpConnection.php(480): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #60, Object(Workerman\Events\React\ExtEventLoop))
+#5 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(319): call_user_func(Array, Resource id #60, Object(Workerman\Events\React\ExtEventLoop))
+#6 [internal function]: React\EventLoop\ExtEventLoop->React\EventLoop\{closure}(Resource id #60, 2, NULL)
+#7 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(205): EventBase->loop(1)
+#8 /var/www/html/game/vendor/workerman/workerman/Events/React.php(122): React\EventLoop\ExtEventLoop->run()
+#9 /var/www/html/game/vendor/workerman/workerman/Worker.php(1537): Workerman\Events\React->loop()
+#10 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(183): Workerman\Worker->run()
+#11 /var/www/html/game/vendor/workerman/workerman/Worker.php(936): GatewayWorker\BusinessWorker->run()
+#12 /var/www/html/game/vendor/workerman/workerman/Worker.php(899): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#13 /var/www/html/game/vendor/workerman/workerman/Worker.php(1052): Workerman\Worker::forkWorkers()
+#14 /var/www/html/game/vendor/workerman/workerman/Worker.php(434): Workerman\Worker::monitorWorkers()
+#15 /var/www/html/game/start.php(37): Workerman\Worker::runAll()
+#16 {main}
+2017-04-13 12:12:17 pid:26028 WORKER EXIT UNEXPECTED 
+2017-04-13 12:12:17 pid:3536 worker[YourAppBusinessWorker:26028] exit with status 64000
+2017-04-13 12:12:51 pid:3536 Workerman[start.php] Stopping ...
+2017-04-13 12:12:51 pid:3536 Workerman[start.php] has been stopped
+2017-04-13 12:12:57 pid:26816 Workerman[start.php] start in DEBUG mode
+2017-04-13 12:13:07 pid:26819 exception 'Exception' with message '房间号$_SESSION['room_id']未设置. 客户端ip:127.0.0.1' in /var/www/html/game/Applications/five/Events.php:212
+Stack trace:
+#0 [internal function]: Events::onMessage('7f0000010b57000...', '{"type":"start"...')
+#1 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(369): call_user_func('Events::onMessa...', '7f0000010b57000...', '{"type":"start"...')
+#2 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#3 /var/www/html/game/vendor/workerman/workerman/Connection/TcpConnection.php(480): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #54, Object(Workerman\Events\React\ExtEventLoop))
+#5 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(319): call_user_func(Array, Resource id #54, Object(Workerman\Events\React\ExtEventLoop))
+#6 [internal function]: React\EventLoop\ExtEventLoop->React\EventLoop\{closure}(Resource id #54, 2, NULL)
+#7 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(205): EventBase->loop(1)
+#8 /var/www/html/game/vendor/workerman/workerman/Events/React.php(122): React\EventLoop\ExtEventLoop->run()
+#9 /var/www/html/game/vendor/workerman/workerman/Worker.php(1537): Workerman\Events\React->loop()
+#10 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(183): Workerman\Worker->run()
+#11 /var/www/html/game/vendor/workerman/workerman/Worker.php(936): GatewayWorker\BusinessWorker->run()
+#12 /var/www/html/game/vendor/workerman/workerman/Worker.php(899): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#13 /var/www/html/game/vendor/workerman/workerman/Worker.php(431): Workerman\Worker::forkWorkers()
+#14 /var/www/html/game/start.php(37): Workerman\Worker::runAll()
+#15 {main}
+2017-04-13 12:13:07 pid:26819 WORKER EXIT UNEXPECTED 
+2017-04-13 12:13:07 pid:26816 worker[YourAppBusinessWorker:26819] exit with status 64000
+2017-04-13 12:16:31 pid:26820 exception 'Exception' with message '房间号$_SESSION['room_id']未设置. 客户端ip:127.0.0.1' in /var/www/html/game/Applications/five/Events.php:212
+Stack trace:
+#0 [internal function]: Events::onMessage('7f0000010b56000...', '{"type":"start"...')
+#1 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(369): call_user_func('Events::onMessa...', '7f0000010b56000...', '{"type":"start"...')
+#2 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#3 /var/www/html/game/vendor/workerman/workerman/Connection/TcpConnection.php(480): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #56, Object(Workerman\Events\React\ExtEventLoop))
+#5 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(319): call_user_func(Array, Resource id #56, Object(Workerman\Events\React\ExtEventLoop))
+#6 [internal function]: React\EventLoop\ExtEventLoop->React\EventLoop\{closure}(Resource id #56, 2, NULL)
+#7 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(205): EventBase->loop(1)
+#8 /var/www/html/game/vendor/workerman/workerman/Events/React.php(122): React\EventLoop\ExtEventLoop->run()
+#9 /var/www/html/game/vendor/workerman/workerman/Worker.php(1537): Workerman\Events\React->loop()
+#10 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(183): Workerman\Worker->run()
+#11 /var/www/html/game/vendor/workerman/workerman/Worker.php(936): GatewayWorker\BusinessWorker->run()
+#12 /var/www/html/game/vendor/workerman/workerman/Worker.php(899): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#13 /var/www/html/game/vendor/workerman/workerman/Worker.php(431): Workerman\Worker::forkWorkers()
+#14 /var/www/html/game/start.php(37): Workerman\Worker::runAll()
+#15 {main}
+2017-04-13 12:16:31 pid:26820 WORKER EXIT UNEXPECTED 
+2017-04-13 12:16:31 pid:26816 worker[YourAppBusinessWorker:26820] exit with status 64000
+2017-04-13 12:16:48 pid:26816 Workerman[start.php] Stopping ...
+2017-04-13 12:16:48 pid:26816 Workerman[start.php] has been stopped
+2017-04-13 12:16:51 pid:27509 Workerman[start.php] start in DEBUG mode
+2017-04-13 13:23:05 pid:27509 Workerman[start.php] Stopping ...
+2017-04-13 13:23:05 pid:27509 Workerman[start.php] has been stopped
+2017-04-13 13:23:10 pid:6603 Workerman[start.php] start in DEBUG mode
+2017-04-13 13:46:37 pid:6603 Workerman[start.php] Stopping ...
+2017-04-13 13:46:37 pid:6603 Workerman[start.php] has been stopped
+2017-04-13 13:46:42 pid:10409 Workerman[start.php] start in DEBUG mode
+2017-04-13 16:50:06 pid:10409 Workerman[start.php] Stopping ...
+2017-04-13 16:50:06 pid:10409 Workerman[start.php] has been stopped
+2017-04-13 16:50:12 pid:7079 Workerman[start.php] start in DEBUG mode
+2017-04-13 16:51:11 pid:7079 Workerman[start.php] Stopping ...
+2017-04-13 16:51:11 pid:7079 Workerman[start.php] has been stopped
+2017-04-13 16:51:13 pid:7296 Workerman[start.php] start in DEBUG mode
+2017-04-13 16:54:55 pid:7296 Workerman[start.php] Stopping ...
+2017-04-13 16:54:55 pid:7296 Workerman[start.php] has been stopped
+2017-04-13 16:54:58 pid:8004 Workerman[start.php] start in DEBUG mode
+2017-04-13 17:28:43 pid:3015 Workerman[start.php] start in DEBUG mode
+2017-04-13 17:38:00 pid:3015 Workerman[start.php] Stopping ...
+2017-04-13 17:38:00 pid:3015 Workerman[start.php] has been stopped
+2017-04-13 17:38:02 pid:4602 Workerman[start.php] start in DEBUG mode
+2017-04-13 18:02:52 pid:3814 Workerman[start.php] start in DEBUG mode
+2017-04-13 21:07:19 pid:3814 Workerman[start.php] Stopping ...
+2017-04-13 21:07:19 pid:3814 Workerman[start.php] has been stopped
+2017-04-13 21:07:21 pid:386 Workerman[start.php] start in DEBUG mode
+2017-04-13 21:14:19 pid:386 Workerman[start.php] Stopping ...
+2017-04-13 21:14:19 pid:386 Workerman[start.php] has been stopped
+2017-04-13 21:14:21 pid:1705 Workerman[start.php] start in DEBUG mode
+2017-04-13 21:28:06 pid:1705 Workerman[start.php] Stopping ...
+2017-04-13 21:28:06 pid:1705 Workerman[start.php] has been stopped
+2017-04-13 21:28:08 pid:4316 Workerman[start.php] start in DEBUG mode
+2017-04-13 21:30:54 pid:4316 Workerman[start.php] Stopping ...
+2017-04-13 21:30:54 pid:4316 Workerman[start.php] has been stopped
+2017-04-13 21:30:56 pid:4875 Workerman[start.php] start in DEBUG mode
+2017-04-13 21:37:38 pid:4875 Workerman[start.php] Stopping ...
+2017-04-13 21:37:38 pid:4875 Workerman[start.php] has been stopped
+2017-04-13 21:37:43 pid:5991 Workerman[start.php] start in DEBUG mode
+2017-04-13 21:40:29 pid:5991 Workerman[start.php] Stopping ...
+2017-04-13 21:40:29 pid:5991 Workerman[start.php] has been stopped
+2017-04-13 21:40:31 pid:6525 Workerman[start.php] start in DEBUG mode
+2017-04-13 21:45:57 pid:6525 Workerman[start.php] Stopping ...
+2017-04-13 21:45:57 pid:6525 Workerman[start.php] has been stopped
+2017-04-13 21:46:27 pid:7481 Workerman[start.php] start in DEBUG mode
+2017-04-13 22:10:23 pid:7481 Workerman[start.php] Stopping ...
+2017-04-13 22:10:23 pid:7481 Workerman[start.php] has been stopped
+2017-04-13 22:10:25 pid:11287 Workerman[start.php] start in DEBUG mode
+2017-04-13 22:10:58 pid:11293 exception 'PDOException' with message 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'field list'' in /var/www/html/game/vendor/workerman/mysql/src/Connection.php:1732
+Stack trace:
+#0 /var/www/html/game/vendor/workerman/mysql/src/Connection.php(1732): PDO->prepare('SELECT client_i...')
+#1 /var/www/html/game/vendor/workerman/mysql/src/Connection.php(1890): Workerman\MySQL\Connection->execute('SELECT client_i...', NULL)
+#2 /var/www/html/game/Applications/five/Events.php(469): Workerman\MySQL\Connection->row('SELECT client_i...')
+#3 [internal function]: Events::onClose('7f0000010b57000...')
+#4 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(374): call_user_func('Events::onClose', '7f0000010b57000...')
+#5 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 /var/www/html/game/vendor/workerman/workerman/Connection/TcpConnection.php(480): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#7 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #56, Object(Workerman\Events\React\ExtEventLoop))
+#8 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(319): call_user_func(Array, Resource id #56, Object(Workerman\Events\React\ExtEventLoop))
+#9 [internal function]: React\EventLoop\ExtEventLoop->React\EventLoop\{closure}(Resource id #56, 2, NULL)
+#10 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(205): EventBase->loop(1)
+#11 /var/www/html/game/vendor/workerman/workerman/Events/React.php(122): React\EventLoop\ExtEventLoop->run()
+#12 /var/www/html/game/vendor/workerman/workerman/Worker.php(1537): Workerman\Events\React->loop()
+#13 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(183): Workerman\Worker->run()
+#14 /var/www/html/game/vendor/workerman/workerman/Worker.php(936): GatewayWorker\BusinessWorker->run()
+#15 /var/www/html/game/vendor/workerman/workerman/Worker.php(899): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#16 /var/www/html/game/vendor/workerman/workerman/Worker.php(431): Workerman\Worker::forkWorkers()
+#17 /var/www/html/game/start.php(37): Workerman\Worker::runAll()
+#18 {main}
+2017-04-13 22:10:58 pid:11293 WORKER EXIT UNEXPECTED 
+2017-04-13 22:10:58 pid:11287 worker[YourAppBusinessWorker:11293] exit with status 64000
+2017-04-13 22:11:40 pid:11294 exception 'PDOException' with message 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'field list'' in /var/www/html/game/vendor/workerman/mysql/src/Connection.php:1732
+Stack trace:
+#0 /var/www/html/game/vendor/workerman/mysql/src/Connection.php(1732): PDO->prepare('SELECT client_i...')
+#1 /var/www/html/game/vendor/workerman/mysql/src/Connection.php(1890): Workerman\MySQL\Connection->execute('SELECT client_i...', NULL)
+#2 /var/www/html/game/Applications/five/Events.php(469): Workerman\MySQL\Connection->row('SELECT client_i...')
+#3 [internal function]: Events::onClose('7f0000010b57000...')
+#4 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(374): call_user_func('Events::onClose', '7f0000010b57000...')
+#5 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 /var/www/html/game/vendor/workerman/workerman/Connection/TcpConnection.php(480): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#7 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #58, Object(Workerman\Events\React\ExtEventLoop))
+#8 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(319): call_user_func(Array, Resource id #58, Object(Workerman\Events\React\ExtEventLoop))
+#9 [internal function]: React\EventLoop\ExtEventLoop->React\EventLoop\{closure}(Resource id #58, 2, NULL)
+#10 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(205): EventBase->loop(1)
+#11 /var/www/html/game/vendor/workerman/workerman/Events/React.php(122): React\EventLoop\ExtEventLoop->run()
+#12 /var/www/html/game/vendor/workerman/workerman/Worker.php(1537): Workerman\Events\React->loop()
+#13 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(183): Workerman\Worker->run()
+#14 /var/www/html/game/vendor/workerman/workerman/Worker.php(936): GatewayWorker\BusinessWorker->run()
+#15 /var/www/html/game/vendor/workerman/workerman/Worker.php(899): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#16 /var/www/html/game/vendor/workerman/workerman/Worker.php(431): Workerman\Worker::forkWorkers()
+#17 /var/www/html/game/start.php(37): Workerman\Worker::runAll()
+#18 {main}
+2017-04-13 22:11:40 pid:11294 WORKER EXIT UNEXPECTED 
+2017-04-13 22:11:40 pid:11287 worker[YourAppBusinessWorker:11294] exit with status 64000
+2017-04-13 22:11:40 pid:11292 exception 'PDOException' with message 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'field list'' in /var/www/html/game/vendor/workerman/mysql/src/Connection.php:1732
+Stack trace:
+#0 /var/www/html/game/vendor/workerman/mysql/src/Connection.php(1732): PDO->prepare('SELECT client_i...')
+#1 /var/www/html/game/vendor/workerman/mysql/src/Connection.php(1890): Workerman\MySQL\Connection->execute('SELECT client_i...', NULL)
+#2 /var/www/html/game/Applications/five/Events.php(469): Workerman\MySQL\Connection->row('SELECT client_i...')
+#3 [internal function]: Events::onClose('7f0000010b54000...')
+#4 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(374): call_user_func('Events::onClose', '7f0000010b54000...')
+#5 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 /var/www/html/game/vendor/workerman/workerman/Connection/TcpConnection.php(480): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#7 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #55, Object(Workerman\Events\React\ExtEventLoop))
+#8 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(319): call_user_func(Array, Resource id #55, Object(Workerman\Events\React\ExtEventLoop))
+#9 [internal function]: React\EventLoop\ExtEventLoop->React\EventLoop\{closure}(Resource id #55, 2, NULL)
+#10 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(205): EventBase->loop(1)
+#11 /var/www/html/game/vendor/workerman/workerman/Events/React.php(122): React\EventLoop\ExtEventLoop->run()
+#12 /var/www/html/game/vendor/workerman/workerman/Worker.php(1537): Workerman\Events\React->loop()
+#13 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(183): Workerman\Worker->run()
+#14 /var/www/html/game/vendor/workerman/workerman/Worker.php(936): GatewayWorker\BusinessWorker->run()
+#15 /var/www/html/game/vendor/workerman/workerman/Worker.php(899): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#16 /var/www/html/game/vendor/workerman/workerman/Worker.php(431): Workerman\Worker::forkWorkers()
+#17 /var/www/html/game/start.php(37): Workerman\Worker::runAll()
+#18 {main}
+2017-04-13 22:11:40 pid:11292 WORKER EXIT UNEXPECTED 
+2017-04-13 22:11:40 pid:11287 worker[YourAppBusinessWorker:11292] exit with status 64000
+2017-04-13 22:11:43 pid:11295 exception 'PDOException' with message 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'field list'' in /var/www/html/game/vendor/workerman/mysql/src/Connection.php:1732
+Stack trace:
+#0 /var/www/html/game/vendor/workerman/mysql/src/Connection.php(1732): PDO->prepare('SELECT client_i...')
+#1 /var/www/html/game/vendor/workerman/mysql/src/Connection.php(1890): Workerman\MySQL\Connection->execute('SELECT client_i...', NULL)
+#2 /var/www/html/game/Applications/five/Events.php(469): Workerman\MySQL\Connection->row('SELECT client_i...')
+#3 [internal function]: Events::onClose('7f0000010b54000...')
+#4 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(374): call_user_func('Events::onClose', '7f0000010b54000...')
+#5 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 /var/www/html/game/vendor/workerman/workerman/Connection/TcpConnection.php(480): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#7 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #55, Object(Workerman\Events\React\ExtEventLoop))
+#8 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(319): call_user_func(Array, Resource id #55, Object(Workerman\Events\React\ExtEventLoop))
+#9 [internal function]: React\EventLoop\ExtEventLoop->React\EventLoop\{closure}(Resource id #55, 2, NULL)
+#10 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(205): EventBase->loop(1)
+#11 /var/www/html/game/vendor/workerman/workerman/Events/React.php(122): React\EventLoop\ExtEventLoop->run()
+#12 /var/www/html/game/vendor/workerman/workerman/Worker.php(1537): Workerman\Events\React->loop()
+#13 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(183): Workerman\Worker->run()
+#14 /var/www/html/game/vendor/workerman/workerman/Worker.php(936): GatewayWorker\BusinessWorker->run()
+#15 /var/www/html/game/vendor/workerman/workerman/Worker.php(899): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#16 /var/www/html/game/vendor/workerman/workerman/Worker.php(431): Workerman\Worker::forkWorkers()
+#17 /var/www/html/game/start.php(37): Workerman\Worker::runAll()
+#18 {main}
+2017-04-13 22:11:43 pid:11295 WORKER EXIT UNEXPECTED 
+2017-04-13 22:11:43 pid:11287 worker[YourAppBusinessWorker:11295] exit with status 64000
+2017-04-13 22:13:09 pid:11514 exception 'PDOException' with message 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'field list'' in /var/www/html/game/vendor/workerman/mysql/src/Connection.php:1732
+Stack trace:
+#0 /var/www/html/game/vendor/workerman/mysql/src/Connection.php(1732): PDO->prepare('SELECT client_i...')
+#1 /var/www/html/game/vendor/workerman/mysql/src/Connection.php(1890): Workerman\MySQL\Connection->execute('SELECT client_i...', NULL)
+#2 /var/www/html/game/Applications/five/Events.php(469): Workerman\MySQL\Connection->row('SELECT client_i...')
+#3 [internal function]: Events::onClose('7f0000010b55000...')
+#4 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(374): call_user_func('Events::onClose', '7f0000010b55000...')
+#5 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 /var/www/html/game/vendor/workerman/workerman/Connection/TcpConnection.php(480): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#7 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #59, Object(Workerman\Events\React\ExtEventLoop))
+#8 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(319): call_user_func(Array, Resource id #59, Object(Workerman\Events\React\ExtEventLoop))
+#9 [internal function]: React\EventLoop\ExtEventLoop->React\EventLoop\{closure}(Resource id #59, 2, NULL)
+#10 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(205): EventBase->loop(1)
+#11 /var/www/html/game/vendor/workerman/workerman/Events/React.php(122): React\EventLoop\ExtEventLoop->run()
+#12 /var/www/html/game/vendor/workerman/workerman/Worker.php(1537): Workerman\Events\React->loop()
+#13 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(183): Workerman\Worker->run()
+#14 /var/www/html/game/vendor/workerman/workerman/Worker.php(936): GatewayWorker\BusinessWorker->run()
+#15 /var/www/html/game/vendor/workerman/workerman/Worker.php(899): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#16 /var/www/html/game/vendor/workerman/workerman/Worker.php(1052): Workerman\Worker::forkWorkers()
+#17 /var/www/html/game/vendor/workerman/workerman/Worker.php(434): Workerman\Worker::monitorWorkers()
+#18 /var/www/html/game/start.php(37): Workerman\Worker::runAll()
+#19 {main}
+2017-04-13 22:13:09 pid:11514 WORKER EXIT UNEXPECTED 
+2017-04-13 22:13:09 pid:11287 worker[YourAppBusinessWorker:11514] exit with status 64000
+2017-04-13 22:14:15 pid:11756 exception 'PDOException' with message 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'field list'' in /var/www/html/game/vendor/workerman/mysql/src/Connection.php:1732
+Stack trace:
+#0 /var/www/html/game/vendor/workerman/mysql/src/Connection.php(1732): PDO->prepare('SELECT client_i...')
+#1 /var/www/html/game/vendor/workerman/mysql/src/Connection.php(1890): Workerman\MySQL\Connection->execute('SELECT client_i...', NULL)
+#2 /var/www/html/game/Applications/five/Events.php(469): Workerman\MySQL\Connection->row('SELECT client_i...')
+#3 [internal function]: Events::onClose('7f0000010b55000...')
+#4 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(374): call_user_func('Events::onClose', '7f0000010b55000...')
+#5 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 /var/www/html/game/vendor/workerman/workerman/Connection/TcpConnection.php(480): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#7 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #62, Object(Workerman\Events\React\ExtEventLoop))
+#8 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(319): call_user_func(Array, Resource id #62, Object(Workerman\Events\React\ExtEventLoop))
+#9 [internal function]: React\EventLoop\ExtEventLoop->React\EventLoop\{closure}(Resource id #62, 2, NULL)
+#10 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(205): EventBase->loop(1)
+#11 /var/www/html/game/vendor/workerman/workerman/Events/React.php(122): React\EventLoop\ExtEventLoop->run()
+#12 /var/www/html/game/vendor/workerman/workerman/Worker.php(1537): Workerman\Events\React->loop()
+#13 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(183): Workerman\Worker->run()
+#14 /var/www/html/game/vendor/workerman/workerman/Worker.php(936): GatewayWorker\BusinessWorker->run()
+#15 /var/www/html/game/vendor/workerman/workerman/Worker.php(899): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#16 /var/www/html/game/vendor/workerman/workerman/Worker.php(1052): Workerman\Worker::forkWorkers()
+#17 /var/www/html/game/vendor/workerman/workerman/Worker.php(434): Workerman\Worker::monitorWorkers()
+#18 /var/www/html/game/start.php(37): Workerman\Worker::runAll()
+#19 {main}
+2017-04-13 22:14:15 pid:11756 WORKER EXIT UNEXPECTED 
+2017-04-13 22:14:15 pid:11287 worker[YourAppBusinessWorker:11756] exit with status 64000
+2017-04-13 22:14:17 pid:11528 exception 'PDOException' with message 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'field list'' in /var/www/html/game/vendor/workerman/mysql/src/Connection.php:1732
+Stack trace:
+#0 /var/www/html/game/vendor/workerman/mysql/src/Connection.php(1732): PDO->prepare('SELECT client_i...')
+#1 /var/www/html/game/vendor/workerman/mysql/src/Connection.php(1890): Workerman\MySQL\Connection->execute('SELECT client_i...', NULL)
+#2 /var/www/html/game/Applications/five/Events.php(469): Workerman\MySQL\Connection->row('SELECT client_i...')
+#3 [internal function]: Events::onClose('7f0000010b55000...')
+#4 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(374): call_user_func('Events::onClose', '7f0000010b55000...')
+#5 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 /var/www/html/game/vendor/workerman/workerman/Connection/TcpConnection.php(480): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#7 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #61, Object(Workerman\Events\React\ExtEventLoop))
+#8 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(319): call_user_func(Array, Resource id #61, Object(Workerman\Events\React\ExtEventLoop))
+#9 [internal function]: React\EventLoop\ExtEventLoop->React\EventLoop\{closure}(Resource id #61, 2, NULL)
+#10 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(205): EventBase->loop(1)
+#11 /var/www/html/game/vendor/workerman/workerman/Events/React.php(122): React\EventLoop\ExtEventLoop->run()
+#12 /var/www/html/game/vendor/workerman/workerman/Worker.php(1537): Workerman\Events\React->loop()
+#13 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(183): Workerman\Worker->run()
+#14 /var/www/html/game/vendor/workerman/workerman/Worker.php(936): GatewayWorker\BusinessWorker->run()
+#15 /var/www/html/game/vendor/workerman/workerman/Worker.php(899): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#16 /var/www/html/game/vendor/workerman/workerman/Worker.php(1052): Workerman\Worker::forkWorkers()
+#17 /var/www/html/game/vendor/workerman/workerman/Worker.php(434): Workerman\Worker::monitorWorkers()
+#18 /var/www/html/game/start.php(37): Workerman\Worker::runAll()
+#19 {main}
+2017-04-13 22:14:17 pid:11528 WORKER EXIT UNEXPECTED 
+2017-04-13 22:14:17 pid:11287 worker[YourAppBusinessWorker:11528] exit with status 64000
+2017-04-13 22:14:20 pid:11517 exception 'PDOException' with message 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'field list'' in /var/www/html/game/vendor/workerman/mysql/src/Connection.php:1732
+Stack trace:
+#0 /var/www/html/game/vendor/workerman/mysql/src/Connection.php(1732): PDO->prepare('SELECT client_i...')
+#1 /var/www/html/game/vendor/workerman/mysql/src/Connection.php(1890): Workerman\MySQL\Connection->execute('SELECT client_i...', NULL)
+#2 /var/www/html/game/Applications/five/Events.php(469): Workerman\MySQL\Connection->row('SELECT client_i...')
+#3 [internal function]: Events::onClose('7f0000010b55000...')
+#4 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(374): call_user_func('Events::onClose', '7f0000010b55000...')
+#5 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 /var/www/html/game/vendor/workerman/workerman/Connection/TcpConnection.php(480): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#7 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #60, Object(Workerman\Events\React\ExtEventLoop))
+#8 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(319): call_user_func(Array, Resource id #60, Object(Workerman\Events\React\ExtEventLoop))
+#9 [internal function]: React\EventLoop\ExtEventLoop->React\EventLoop\{closure}(Resource id #60, 2, NULL)
+#10 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(205): EventBase->loop(1)
+#11 /var/www/html/game/vendor/workerman/workerman/Events/React.php(122): React\EventLoop\ExtEventLoop->run()
+#12 /var/www/html/game/vendor/workerman/workerman/Worker.php(1537): Workerman\Events\React->loop()
+#13 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(183): Workerman\Worker->run()
+#14 /var/www/html/game/vendor/workerman/workerman/Worker.php(936): GatewayWorker\BusinessWorker->run()
+#15 /var/www/html/game/vendor/workerman/workerman/Worker.php(899): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#16 /var/www/html/game/vendor/workerman/workerman/Worker.php(1052): Workerman\Worker::forkWorkers()
+#17 /var/www/html/game/vendor/workerman/workerman/Worker.php(434): Workerman\Worker::monitorWorkers()
+#18 /var/www/html/game/start.php(37): Workerman\Worker::runAll()
+#19 {main}
+2017-04-13 22:14:20 pid:11517 WORKER EXIT UNEXPECTED 
+2017-04-13 22:14:20 pid:11287 worker[YourAppBusinessWorker:11517] exit with status 64000
+2017-04-13 22:15:12 pid:11287 Workerman[start.php] Stopping ...
+2017-04-13 22:15:12 pid:11287 Workerman[start.php] has been stopped
+2017-04-13 22:15:18 pid:12149 Workerman[start.php] start in DEBUG mode
+2017-04-13 22:23:52 pid:12149 Workerman[start.php] Stopping ...
+2017-04-13 22:23:52 pid:12149 Workerman[start.php] has been stopped
+2017-04-13 22:23:54 pid:13625 Workerman[start.php] start in DEBUG mode
+2017-04-13 22:28:38 pid:13625 Workerman[start.php] Stopping ...
+2017-04-13 22:28:38 pid:13625 Workerman[start.php] has been stopped
+2017-04-13 22:28:40 pid:14432 Workerman[start.php] start in DEBUG mode
+2017-04-13 22:30:22 pid:14432 Workerman[start.php] Stopping ...
+2017-04-13 22:30:22 pid:14432 Workerman[start.php] has been stopped
+2017-04-13 22:30:24 pid:14833 Workerman[start.php] start in DEBUG mode
+2017-04-13 22:33:52 pid:14833 Workerman[start.php] Stopping ...
+2017-04-13 22:33:52 pid:14833 Workerman[start.php] has been stopped
+2017-04-13 22:33:54 pid:15613 Workerman[start.php] start in DEBUG mode
+2017-04-13 22:38:29 pid:15613 Workerman[start.php] Stopping ...
+2017-04-13 22:38:29 pid:15613 Workerman[start.php] has been stopped
+2017-04-13 22:38:31 pid:16442 Workerman[start.php] start in DEBUG mode
+2017-04-13 22:42:18 pid:16442 Workerman[start.php] Stopping ...
+2017-04-13 22:42:18 pid:16442 Workerman[start.php] has been stopped
+2017-04-13 22:42:23 pid:17218 Workerman[start.php] start in DEBUG mode
+2017-04-13 22:58:58 pid:17218 Workerman[start.php] Stopping ...
+2017-04-13 22:58:58 pid:17218 Workerman[start.php] has been stopped
+2017-04-13 22:59:01 pid:20000 Workerman[start.php] start in DEBUG mode
+2017-04-13 23:05:27 pid:20000 Workerman[start.php] Stopping ...
+2017-04-13 23:05:27 pid:20000 Workerman[start.php] has been stopped
+2017-04-13 23:05:29 pid:21092 Workerman[start.php] start in DEBUG mode
+2017-04-13 23:09:17 pid:21092 Workerman[start.php] Stopping ...
+2017-04-13 23:09:17 pid:21092 Workerman[start.php] has been stopped
+2017-04-13 23:09:19 pid:21846 Workerman[start.php] start in DEBUG mode
+2017-04-13 23:12:25 pid:21846 Workerman[start.php] Stopping ...
+2017-04-13 23:12:25 pid:21846 Workerman[start.php] has been stopped
+2017-04-13 23:12:27 pid:22442 Workerman[start.php] start in DEBUG mode
+2017-04-13 23:18:32 pid:22442 Workerman[start.php] Stopping ...
+2017-04-13 23:18:32 pid:22442 Workerman[start.php] has been stopped
+2017-04-13 23:18:34 pid:23444 Workerman[start.php] start in DEBUG mode
+2017-04-13 23:22:07 pid:23444 Workerman[start.php] Stopping ...
+2017-04-13 23:22:07 pid:23444 Workerman[start.php] has been stopped

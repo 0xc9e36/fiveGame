@@ -90,7 +90,9 @@
 <script type="text/javascript" >
     window.onload = function(){
 
+        //定义用户信息
         var ws,client_id, client_name, client_logo, client_list = {}, color, desk_status = {},  desk_id, room_id = getQueryString('room_id');
+        //框架信息
         var form = layui.form();
         var element = layui.element();
 
@@ -109,7 +111,7 @@
                         client_name = '游客'+getRandomNum(1,1000);
                     }
                     if(!client_logo) client_logo = images + getRandomNum(1, 9)+'.jpg';
-                    //关闭弹出执行websocket连接
+                    //关闭弹出并执行websocket连接
                     connect();
                     $('#room_id').html("当前房间 : " + room_id);
                 },
@@ -137,8 +139,8 @@
         function open(){
             // 发送登录消息
             var login_data = '{"type":"login", "client_logo":"'+client_logo+'", "client_name":"'+client_name.replace(/"/g, '\\"')+'","room_id":"'+room_id+'"}';
-            console.log("websocket握手成功，发送登录数据:"+login_data);
             ws.send(login_data);
+            console.log("websocket握手成功，发送登录数据:"+login_data);
         }
 
         //接收消息
@@ -150,7 +152,6 @@
                 //登录
                 case 'login' :
                     client_id = data['client_id'];
-                    client_name = data['client_name'];
 
                     //顶部玩家在线Logo
                     $('#player').html('<i class="layui-icon" style="font-size: 20px; color: yellow;">&#xe610;  '+client_name+'</i>' );
@@ -195,8 +196,8 @@
                     //console.log(data['color']);
                     break;
 
-                //退出游戏
-                case 'end' :
+                //退出棋桌
+                case 'out' :
                     console.log(data);
                     refresh_chess_desk(data['from_client_id'], data['desk_id'], data['color'], data['from_client_name'], data['client_logo'], false);
                     break;
@@ -211,6 +212,7 @@
                         alert(data['content']);
                     }
                     break;
+
                 //打开新页面
                 case 'open' :
                     //element.progress('demo', '50%');

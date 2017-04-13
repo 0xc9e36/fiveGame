@@ -20,7 +20,7 @@
             <div class="white">
                 <div class="player-logo"></div>
                 <div class="player-info">
-                    <img src="../images/white-chess.png" class="chess-logo">
+                    <img class="chess-logo">
                     <span class="chess-info">
                         <ul>
                             <li>昵称 : <span class="client_name"></span></li>
@@ -34,7 +34,7 @@
             <div class="black">
                 <div class="player-logo"></div>
                 <div class="player-info">
-                    <img src="../images/black-chess.png" class="chess-logo">
+                    <img class="chess-logo">
                     <span class="chess-info">
                     <span class="chess-info">
                         <ul>
@@ -53,6 +53,13 @@
     <span class="border">
         <span class="title">五子棋游戏(玩家对奕)</span>
         <canvas id="chessboard" width="600" height="600"></canvas>
+        <div class="operation">
+            <ul>
+                <li><button class="layui-btn layui-btn-radius layui-btn-normal" id="retract">悔棋</button></li>
+                <li><button class="layui-btn layui-btn-radius layui-btn-normal" id="start" click="on">准备</button></li>
+                <li><button class="layui-btn layui-btn-radius layui-btn-normal" id="end">认输</button></li>
+            </ul>
+        </div>
     </span>
 
     <span class="right">
@@ -73,6 +80,7 @@
         <div class="chess-chat">玩家聊天信息~ 即将实现</div>
     </span>
 </div>
+<div style="clear: both"></div>
 
 </body>
 </html>

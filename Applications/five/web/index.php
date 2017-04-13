@@ -14,7 +14,7 @@
 <body>
     <ul class="layui-nav" lay-filter="">
         <li class="layui-nav-item layui-this"><a href="">首页</a></li>
-        <li class="layui-nav-item"><a href="https://github.com/" target="_blank">源码</a></li>
+        <li class="layui-nav-item"><a href="https://github.com/tw1996/fiveGame" target="_blank">源码</a></li>
     </ul>
     <hr>
     &nbsp;&nbsp;<a name="default">你好, 欢迎来到五子棋.</a>  <a href="#" class="layui-btn layui-btn-small layui-btn-radius layui-btn-danger">快速开始</a>

@@ -28,6 +28,7 @@ CREATE TABLE `client` (
   `client_name` varchar(50) NOT NULL,
   `client_logo` varchar(100) NOT NULL,
   `move` tinyint(4) NOT NULL DEFAULT '0',
+  `start` tinyint(4) NOT NULL DEFAULT '0' COMMENT '玩家当前状态 默认0未准备, 1已经准备',
   `chessboard` varchar(500) NOT NULL COMMENT '当前棋局'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -63,7 +64,7 @@ CREATE TABLE `desk` (
 
 LOCK TABLES `desk` WRITE;
 /*!40000 ALTER TABLE `desk` DISABLE KEYS */;
-INSERT INTO `desk` VALUES (1,1,'',''),(1,2,'',''),(1,3,'',''),(1,4,'','');
+INSERT INTO `desk` VALUES (1,1,'',''),(1,2,'',''),(1,3,'',''),(1,4,'',''),(1,5,'',''),(1,6,'',''),(1,7,'',''),(1,8,'',''),(1,9,'',''),(1,10,'',''),(1,12,'',''),(1,13,'',''),(1,14,'',''),(1,15,'',''),(1,25,'',''),(1,30,'',''),(1,34,'',''),(1,35,'',''),(1,38,'',''),(1,97,'',''),(2,3,'',''),(11,5,'','');
 /*!40000 ALTER TABLE `desk` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -76,4 +77,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-10 16:00:51
+-- Dump completed on 2017-04-13 23:22:28
