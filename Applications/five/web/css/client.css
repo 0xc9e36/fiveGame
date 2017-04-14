@@ -1,145 +1,40 @@
 body{background:#5480AD;}
+ul{  float: left;  padding-left: 0px;  }
+ul li{  list-style: none;  line-height: 150%;  }
+/*整体区域*/
 .main{  width: 1100px;  margin: auto;  }
-canvas {
-    display: inline-block;
-    /*margin: 50px auto;*/
-    margin-left: 25px;
-    box-shadow: 10px 10px 5px #888888;
-    background-color: #fff67f;
-}
-p{  font-size:18px;  text-align:center;  }
-.left{
-    display : block;
-    float: left;
-    width: 178px;
-    height: 750px;
-}
-.border{
-    width: 60%;
-    height: 750px;
-    display : inline-block;
-    float: left;
-}
-.title{
-    display: inline-block;
-    height: 50px;
-    line-height: 50px;
-    text-align: center;
-    font-size: 20px;
-    width: 90%;
-    background: #DCC09B;
-    border-radius: 20px;
-    margin-left: 30px;
-    margin-top: 2px;
-    margin-bottom: 8px;
-}
-.right{
-    display : inline-block;
-    width: 20%;
-    height: 600px;
-    margin-top: 60px;
-    border-radius: 10px;
-    float: left;
-    background: #4C4C4C;
-}
-.player{
-    margin-top: 60px;
-    height: 570px;
-    padding-top: 40px;
-    background: #DCC09B;
-    border-radius: 10px;
-}
-.white{
-    height: 240px;
-}
-.black{
-    border-top: 10px solid #5480AD;
-    margin-top: 40px;
-    height: 240px;
-}
-.player-logo{
-    height: 134px;
-    background: url("../images/no-player.gif");
-}
-.player-info{
-    height: 90px;
-    margin-top: 15px;
-}
-.chess-logo{
-    margin-top: 26px;
-    background: url("../images/black-chess.png");
-}
-.chess-info{
-    padding-top: 10px;
-    float: right;
-    width: 120px;
-    height: 90px;;
-    background: black;
-    color: white;
-    font-size: 10px;
-}
-ul{
-    float: left;
-    padding-left: 0px;
-}
-ul li{
-    list-style: none;
-    line-height: 150%;
-}
+/*棋盘*/
+canvas {  display: inline-block;  margin-left: 25px;  box-shadow: 10px 10px 5px #888888;  background-color: #fff67f;  }
+/*左侧玩家信息*/
+.left{  display : block;  float: left;  width: 178px;  height: 750px;  }
+/*中间棋盘*/
+.border{  width: 60%;  height: 750px;  display : inline-block;  float: left;  }
+/*顶部标题*/
+.title{  display: inline-block;  height: 50px;  line-height: 50px;  text-align: center;  font-size: 20px;  width: 90%;  background: #DCC09B;  border-radius: 20px;  margin-left: 30px;  margin-top: 2px;  margin-bottom: 8px;  }
+/*右边玩家信息及聊天*/
+.right{  display : inline-block;  width: 20%;  height: 600px;  margin-top: 60px;  border-radius: 10px;  float: left;  background: #4C4C4C;  }
+/*玩家信息*/
+.player{  margin-top: 60px;  height: 570px;  padding-top: 40px;  background: #DCC09B;  border-radius: 10px;  }
+/*白棋玩家*/
+.white{  height: 240px;  }
+/*黑棋玩家*/
+.black{  border-top: 10px solid #5480AD;  margin-top: 40px; height: 240px;  }
+/*玩家头像*/
+.player-logo{  height: 134px;  background: url("../images/no-player.gif");  }
+/*玩家具体信息*/
+.player-info{  height: 90px;  margin-top: 15px;  }
+/*棋子*/
+.chess-logo{  margin-top: 26px; }
+.chess-info{  padding-top: 10px;  float: right;  width: 120px;  height: 90px;;  background: black;  color: white;  font-size: 10px;  }
 /*当前玩家信息*/
-.me-info{
-    height: 180px;
-    border-bottom: 5px solid white;
-    color: white;
-}
-.room-title{
-    display: inline-block;
-    height: 40px;
-    width:100%;
-    text-align: center;
-    line-height: 40px;
-}
-/*玩家logo*/
-.detail-left{
-    display: inline-block;
-    width: 38px;
-    height: 38px;
-    background: url("../images/1.jpg");
-    margin-top: 40px;
-    margin-left: 20px;
-    float: left;
-}
-.detail-right{
-    float: right;
-    display: inline-block;
-    width: 150px;
-    margin-top: 10px;
-}
-
-/*操作*/
-.operation{
-    display: inline-block;
-    height: 50px;
-    line-height: 50px;
-    text-align: center;
-    font-size: 20px;
-    width: 90%;
-    background: #DCC09B;
-    border-radius: 20px;
-    margin-left: 30px;
-    margin-top: 2px;
-    margin-bottom: 8px;
-}
-
-.operation ul{
-    margin-left: 45px;
-    width: 500px;
-}
-
-.operation ul li{
-    width: 120px;
-    line-height: 50px;
-    margin-left: 34px;
-    text-align: center;
-    float: left;
-}
+.me-info{  height: 180px;  border-bottom: 5px solid white;  color: white;  }
+/*具体信息标题*/
+.room-title{  display: inline-block;  height: 40px;  width:100%;  text-align: center;  line-height: 40px;  }
+/*右侧玩家logo*/
+.detail-left{  display: inline-block;  width: 38px;  height: 38px;  background: url("../images/1.jpg");  margin-top: 40px;  margin-left: 20px;  float: left;  }
+/*右侧具体信息*/
+.detail-right{  float: right;  display: inline-block;  width: 150px;  margin-top: 10px;  }
+/*底部操作*/
+.operation{  display: inline-block;  height: 50px;  line-height: 50px;  text-align: center;  font-size: 20px;  width: 90%;  background: #DCC09B;  border-radius: 20px;  margin-left: 30px;  margin-top: 2px;  margin-bottom: 8px;  }
+.operation ul{  margin-left: 45px;  width: 500px;  }
+.operation ul li{  width: 120px;  line-height: 50px;  margin-left: 34px;  text-align: center;  float: left;  }

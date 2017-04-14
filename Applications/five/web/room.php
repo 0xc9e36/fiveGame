@@ -15,7 +15,6 @@
         <div class="layui-bg-cyan"><span id="room_id"></span> &nbsp;&nbsp; <span id="player"></span></div>
 
         <div class="main">
-
             <table align="center">
                 <?php for($i = 1; $i <= 25; $i++){  ?>
                 <tr>
@@ -42,6 +41,7 @@
                 <?php } ?>
             </table>
         </div>
+
         <div class="chat">
 
             <div class="player-list">
@@ -140,7 +140,7 @@
             // 发送登录消息
             var login_data = '{"type":"login", "client_logo":"'+client_logo+'", "client_name":"'+client_name.replace(/"/g, '\\"')+'","room_id":"'+room_id+'"}';
             ws.send(login_data);
-            console.log("websocket握手成功，发送登录数据:"+login_data);
+            //console.log("websocket握手成功，发送登录数据:"+login_data);
         }
 
         //接收消息
@@ -178,7 +178,7 @@
                     //刷新房间棋桌状态
                     refresh_desk_status();
 
-                    console.log("用户名:" + data['client_name'] + "登录成功" + ", 分配进程id:" + data['client_id']);
+                    //console.log("用户名:" + data['client_name'] + "登录成功" + ", 分配进程id:" + data['client_id']);
                     break;
 
 
@@ -209,7 +209,7 @@
                         //刷新棋桌状态
                         refresh_chess_desk(data['client_id'], data['desk_id'], data['color'], data['client_name'], data['client_logo'], true);
                     } else {
-                        alert(data['content']);
+                        layer.msg(data['content']);
                     }
                     break;
 
@@ -332,19 +332,18 @@
         $(".desk-left,.desk-middle,.desk-right").click(function(){
             var desk_on = $(this).children("div").attr('class');
             if(desk_on == 'desk-on' || desk_on == 'desk-board-on'){
-                alert('这个座位已经有人了');
+                layer.msg('这个座位已经有人了');
                 return ;
             }
             var desk_id = $(this).parent().attr('id');
             var desk_color = $(this).attr('class');
             var color = 'black';
             if(desk_color == 'desk-left') color = 'white';
-            var data = '{"type":"sit","desk_id":"'+desk_id+'","color":"'+color+'","client_logo":"'+client_logo+'"}'
-            /*var index = layer.load(1, {time: 1000}); //1秒跳转
+            var data = '{"type":"sit","desk_id":"'+desk_id+'","color":"'+color+'"}'
+            var index = layer.load(1, {time: 1000}); //1秒跳转
             setTimeout(function(){
                 ws.send(data);
-            }, 1000);*/
-            ws.send(data);
+            }, 1000);
         });
     };
 

@@ -6,9 +6,11 @@
 
 var site = "http://www.game.com/";      //网站根目录
 
-var images = site + 'images/';          //图片路径
+var images = site + 'images/';          //图片服务器路径
 
 var ip = '127.0.0.1:8282';              //ip地址+端口
+
+
 
 /************************配置房间信息*******************************/
 var room = new Array();
@@ -26,11 +28,13 @@ for(i = 0; i < 15; i++) {
     }
 }
 
-console.log(room);
+//debug
+//console.log(room);
 
 
 
-//获取时间
+/************************公用函数**********************************/
+//获取当前格式化时间
 function CurentTime()
 {
     var now = new Date();

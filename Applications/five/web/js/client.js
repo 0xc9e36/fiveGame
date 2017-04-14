@@ -35,7 +35,7 @@ window.onload = function(){
         color = getQueryString("color");
         // 发送登录消息
         var data = '{"type":"entry", "color":"'+color+'" ,"room_client_id":"'+room_client_id+'", "room_id":"'+room_id+'", "desk_id" : "'+desk_id+'"}';
-        //console.log("websocket握手成功，发送登录数据:"+data);
+        console.log("websocket握手成功，发送登录数据:"+data);
         ws.send(data);
     }
 
@@ -44,145 +44,111 @@ window.onload = function(){
         //转为json对象
         var obj = eval('(' + e.data + ')');
         var data = obj.data;
-        //console.log(obj);
+        console.log(obj.type);
 
-        //玩家进入房间
-        if (obj.status == 0) {//初始化名字
-            //console.log(data.client_name);
-            $('.cur_name').html(data.client_name);
-            $('.detail-left').css('background-image','url('+data.client_logo+')');
-            //当前玩家信息设置
-            setPlayer(data.client_name, data.client_logo, color);
-            //console.log(data.competitor);
+        switch(obj.type) {
 
-            //如果有对手设置对手信息
-            if(data.competitor){
+            //玩家进入房间
+            case 'self_entry' : //初始化名字
+
+                //console.log(data.client_name);
+                $('.cur_name').html(data.client_name);
+                $('.detail-left').css('background-image', 'url(' + data.client_logo + ')');
+                //当前玩家信息设置
+                setPlayer(data.client_name, data.client_logo, color);
+                //console.log(data.competitor);
+
+                //如果有对手设置对手信息
+                if (data.competitor) {
+                    var competitor = data.competitor;
+                    //设置对手玩家信息
+                    setPlayer(competitor.client_name, competitor.client_logo, competitor.color);
+                }
+                //console.log(data);
+            break;
+
+            //对手进入房间
+            case 'competitor_entry' :
+                console.log('对手进入房间啦');
+                console.log(data);
                 var competitor = data.competitor;
                 //设置对手玩家信息
                 setPlayer(competitor.client_name, competitor.client_logo, competitor.color);
-            }
-            //console.log(data);
-        }
+                //console.log(data);
+            break;
 
-        //有对手进入房间
-        if (obj.status == 1) {
-            //console.log(data);
-            var competitor = data.competitor;
-            //设置对手玩家信息
-            setPlayer(competitor.client_name, competitor.client_logo, competitor.color);
-            //console.log(data);
-        }
+            //对手离开房间
+            case 'out':
+                console.log(data);
+                //清空对手玩家信息
+                clearPLayer(color);
+            break;
 
-        //对手离开房间
-        if (obj.type == 'out') {
+            //双方开始游戏
+            case 'start' :
 
-            console.log(data);
-            //清空对手玩家信息
-            clearPLayer(color);
+                context.beginPath();
+                context.clearRect(0, 0, 600, 600);
+                //绘制棋子
+                drawChessBoard();
 
-            //逃跑
-            if(data.status == 0){
+                competitor_id = data.competitor_id;
+
+                console.log(data.competitor);
+                layer.msg(data.msg);
+            break;
+
+            //玩家落子
+            case 'playing' :
+                var coordinate_x = data.x;
+                var coordinate_y = data.y;
+                var black = data.color == 'black' ? true : false;
+                chess(coordinate_x, coordinate_y, black);
+            break;
+
+            //禁止的操作
+            case 'ban' :
+                layer.msg(obj.msg);
+            break;
+
+            //玩家胜利
+            case 'finish':
+                //对方逃跑则清空信息
+                if(2 == data.status)
+                    clearPLayer(color);
+
                 var msg = data.msg;
                 layer.open({
-                    btn : ['重新准备', '离开'],
+                    btn: ['再来一盘', '离开'],
                     title: '提示',
                     content: msg,
-                    yes: function(index, layero){
-                        competitor_id = null;
-                        var data = '{"type":"start", "color":"'+color+'" ,"room_client_id":"'+room_client_id+'", "room_id":"'+room_id+'", "desk_id" : "'+desk_id+'"}';
+                    yes: function (index, layero) {
+                        //var data = '{"type":"entry", "color":"'+color+'" ,"room_client_id":"'+room_client_id+'", "room_id":"'+room_id+'", "desk_id" : "'+desk_id+'"}';
+                        var data = '{"type":"start"}';
                         //console.log(data);
                         ws.send(data);
                         layer.close(index);
                     },
-                    btn2: function(){
+                    btn2: function () {
+                        var data = '{"type":"out", "competitor":"'+competitor_id+'"}';
+                        //console.log(data);
+                        ws.send(data);
                         //关闭连接
                         ws.close();
                         window.opener = null;
                         window.open('', '_self');
                         window.close()
                     },
-                    'cancel' :function () {
+                    'cancel': function () {
                         return false;
                     },
-                    'end' :function () {
+                    'end': function () {
                     },
                 });
-            }
-            // status == 1 正常离开
-            //var competitor = data.competitor;
-            //设置对手玩家信息
-            //setPlayer(competitor.client_name, competitor.client_logo, competitor.color);
-            //console.log(data);
+            break;
+
         }
 
-
-
-        //双方开始游戏
-        if(obj.status == 2){
-
-            context.beginPath();
-            context.clearRect(0,0,600,600);
-            //绘制棋子
-            drawChessBoard();
-
-            competitor_id = data.competitor_id;
-
-            console.log(data.competitor);
-            /*
-            if(data.competitor){
-                var competitor = data.competitor;
-                //设置对手玩家信息
-                setPlayer(competitor.client_name, competitor.client_logo, competitor.color);
-            }
-            */
-            layer.msg(data.msg);
-        }
-
-        //玩家落子
-        if (obj.status == 3) {//
-            var coordinate_x = data.x;
-            var coordinate_y = data.y;
-            var black = data.color == 'black' ? true : false;
-            chess(coordinate_x, coordinate_y, black);
-        }
-
-        //对手落子
-        if (obj.status == 4) {//
-            layer.msg(obj.msg);
-        }
-
-        //玩家胜利
-        if (obj.status == 5) {//
-            var msg = data.msg;
-            layer.open({
-                btn : ['再来一盘', '离开'],
-                title: '提示',
-                content: msg,
-                yes: function(index, layero){
-                    var data = '{"type":"start", "color":"'+color+'" ,"room_client_id":"'+room_client_id+'", "room_id":"'+room_id+'", "desk_id" : "'+desk_id+'"}';
-                    //console.log(data);
-                    ws.send(data);
-                    layer.close(index);
-                },
-                btn2: function(){
-                    //关闭连接
-                    ws.close();
-                    window.opener = null;
-                    window.open('', '_self');
-                    window.close()
-                },
-                'cancel' :function () {
-                    return false;
-                },
-                'end' :function () {
-                },
-            });
-        }
-
-
-        if(obj.status == 6){
-            layer.msg(obj.msg);
-        }
     };
 
 
@@ -244,7 +210,7 @@ window.onload = function(){
         curBox.find('.player-logo').css('background-image',"url('../images/person.gif')");
     }
 
-    //清空玩家信息
+    //清空对手信息
     function clearPLayer(color){
         var box = color == 'black' ? $('.white') : $('.black');
         console.log(color);
@@ -261,16 +227,16 @@ window.onload = function(){
         if (r != null) return unescape(r[2]); return null;
     }
 
-    //玩家悔棋
+    //悔棋操作
     $('#retract').click(function(){
-        alert('暂未实现');
+        layer.msg('暂不支持');
     });
 
     //玩家准备
     $('#start').click(function(){
         //已经准备过了禁止点击
         if($(this).attr('click') == 'off') return false;
-        var data = '{"type":"start", "color":"'+color+'" ,"room_client_id":"'+room_client_id+'", "room_id":"'+room_id+'", "desk_id" : "'+desk_id+'"}';
+        var data = '{"type":"start"}';
         $(this).attr('class', 'layui-btn layui-btn-disabled');
         $(this).attr('click', 'off');
         console.log(data);
@@ -280,7 +246,12 @@ window.onload = function(){
 
     //玩家认输
     $('#end').click(function(){
-        alert('玩家认输');
+        layer.confirm('确定要向对方认输吗', {icon: 3, title:'提示'}, function(index){
+            //do something
+            var data = '{"type":"end"}';
+            ws.send(data);
+            layer.close(index);
+        });
     });
 }
 

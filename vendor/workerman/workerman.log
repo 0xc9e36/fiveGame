@@ -8366,3 +8366,201 @@ Stack trace:
 2017-04-13 23:18:34 pid:23444 Workerman[start.php] start in DEBUG mode
 2017-04-13 23:22:07 pid:23444 Workerman[start.php] Stopping ...
 2017-04-13 23:22:07 pid:23444 Workerman[start.php] has been stopped
+2017-04-13 23:26:01 pid:24795 Workerman[start.php] start in DEBUG mode
+2017-04-14 06:01:42 pid:2895 Workerman[start.php] start in DEBUG mode
+2017-04-14 06:31:35 pid:2895 Workerman[start.php] Stopping ...
+2017-04-14 06:31:35 pid:2895 Workerman[start.php] has been stopped
+2017-04-14 06:31:37 pid:3914 Workerman[start.php] start in DEBUG mode
+2017-04-14 06:38:32 pid:3914 Workerman[start.php] Stopping ...
+2017-04-14 06:38:32 pid:3914 Workerman[start.php] has been stopped
+2017-04-14 06:38:34 pid:4096 Workerman[start.php] start in DEBUG mode
+2017-04-14 07:01:01 pid:4096 Workerman[start.php] Stopping ...
+2017-04-14 07:01:01 pid:4096 Workerman[start.php] has been stopped
+2017-04-14 07:01:03 pid:4638 Workerman[start.php] start in DEBUG mode
+2017-04-14 07:12:47 pid:4638 Workerman[start.php] Stopping ...
+2017-04-14 07:12:47 pid:4638 Workerman[start.php] has been stopped
+2017-04-14 07:13:54 pid:6495 Workerman[start.php] start in DEBUG mode
+2017-04-14 07:21:54 pid:6495 Workerman[start.php] Stopping ...
+2017-04-14 07:21:54 pid:6495 Workerman[start.php] has been stopped
+2017-04-14 07:21:56 pid:7797 Workerman[start.php] start in DEBUG mode
+2017-04-14 07:33:21 pid:7797 Workerman[start.php] Stopping ...
+2017-04-14 07:33:21 pid:7797 Workerman[start.php] has been stopped
+2017-04-14 07:33:23 pid:9655 Workerman[start.php] start in DEBUG mode
+2017-04-14 07:40:14 pid:9655 Workerman[start.php] Stopping ...
+2017-04-14 07:40:14 pid:9655 Workerman[start.php] has been stopped
+2017-04-14 07:40:16 pid:10834 Workerman[start.php] start in DEBUG mode
+2017-04-14 07:40:54 pid:10837 exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'client_id'' in /var/www/html/game/vendor/workerman/mysql/src/Connection.php:1740
+Stack trace:
+#0 /var/www/html/game/vendor/workerman/mysql/src/Connection.php(1740): PDOStatement->execute()
+#1 /var/www/html/game/vendor/workerman/mysql/src/Connection.php(1820): Workerman\MySQL\Connection->execute('UPDATE `client`...', Array)
+#2 /var/www/html/game/Applications/five/Events.php(481): Workerman\MySQL\Connection->query()
+#3 [internal function]: Events::onClose('7f0000010b54000...')
+#4 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(374): call_user_func('Events::onClose', '7f0000010b54000...')
+#5 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 /var/www/html/game/vendor/workerman/workerman/Connection/TcpConnection.php(480): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#7 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #54, Object(Workerman\Events\React\ExtEventLoop))
+#8 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(319): call_user_func(Array, Resource id #54, Object(Workerman\Events\React\ExtEventLoop))
+#9 [internal function]: React\EventLoop\ExtEventLoop->React\EventLoop\{closure}(Resource id #54, 2, NULL)
+#10 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(205): EventBase->loop(1)
+#11 /var/www/html/game/vendor/workerman/workerman/Events/React.php(122): React\EventLoop\ExtEventLoop->run()
+#12 /var/www/html/game/vendor/workerman/workerman/Worker.php(1537): Workerman\Events\React->loop()
+#13 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(183): Workerman\Worker->run()
+#14 /var/www/html/game/vendor/workerman/workerman/Worker.php(936): GatewayWorker\BusinessWorker->run()
+#15 /var/www/html/game/vendor/workerman/workerman/Worker.php(899): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#16 /var/www/html/game/vendor/workerman/workerman/Worker.php(431): Workerman\Worker::forkWorkers()
+#17 /var/www/html/game/start.php(37): Workerman\Worker::runAll()
+#18 {main}
+2017-04-14 07:40:54 pid:10837 WORKER EXIT UNEXPECTED 
+2017-04-14 07:40:54 pid:10834 worker[YourAppBusinessWorker:10837] exit with status 64000
+2017-04-14 07:42:04 pid:10835 exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'client_id'' in /var/www/html/game/vendor/workerman/mysql/src/Connection.php:1740
+Stack trace:
+#0 /var/www/html/game/vendor/workerman/mysql/src/Connection.php(1740): PDOStatement->execute()
+#1 /var/www/html/game/vendor/workerman/mysql/src/Connection.php(1820): Workerman\MySQL\Connection->execute('UPDATE `client`...', Array)
+#2 /var/www/html/game/Applications/five/Events.php(481): Workerman\MySQL\Connection->query()
+#3 [internal function]: Events::onClose('7f0000010b57000...')
+#4 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(374): call_user_func('Events::onClose', '7f0000010b57000...')
+#5 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 /var/www/html/game/vendor/workerman/workerman/Connection/TcpConnection.php(480): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#7 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #55, Object(Workerman\Events\React\ExtEventLoop))
+#8 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(319): call_user_func(Array, Resource id #55, Object(Workerman\Events\React\ExtEventLoop))
+#9 [internal function]: React\EventLoop\ExtEventLoop->React\EventLoop\{closure}(Resource id #55, 2, NULL)
+#10 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(205): EventBase->loop(1)
+#11 /var/www/html/game/vendor/workerman/workerman/Events/React.php(122): React\EventLoop\ExtEventLoop->run()
+#12 /var/www/html/game/vendor/workerman/workerman/Worker.php(1537): Workerman\Events\React->loop()
+#13 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(183): Workerman\Worker->run()
+#14 /var/www/html/game/vendor/workerman/workerman/Worker.php(936): GatewayWorker\BusinessWorker->run()
+#15 /var/www/html/game/vendor/workerman/workerman/Worker.php(899): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#16 /var/www/html/game/vendor/workerman/workerman/Worker.php(431): Workerman\Worker::forkWorkers()
+#17 /var/www/html/game/start.php(37): Workerman\Worker::runAll()
+#18 {main}
+2017-04-14 07:42:04 pid:10835 WORKER EXIT UNEXPECTED 
+2017-04-14 07:42:04 pid:10834 worker[YourAppBusinessWorker:10835] exit with status 64000
+2017-04-14 07:46:00 pid:10834 Workerman[start.php] Stopping ...
+2017-04-14 07:46:00 pid:10834 Workerman[start.php] has been stopped
+2017-04-14 07:46:02 pid:11771 Workerman[start.php] start in DEBUG mode
+2017-04-14 07:47:25 pid:11774 exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'client_id'' in /var/www/html/game/vendor/workerman/mysql/src/Connection.php:1740
+Stack trace:
+#0 /var/www/html/game/vendor/workerman/mysql/src/Connection.php(1740): PDOStatement->execute()
+#1 /var/www/html/game/vendor/workerman/mysql/src/Connection.php(1820): Workerman\MySQL\Connection->execute('UPDATE `client`...', Array)
+#2 /var/www/html/game/Applications/five/Events.php(481): Workerman\MySQL\Connection->query()
+#3 [internal function]: Events::onClose('7f0000010b56000...')
+#4 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(374): call_user_func('Events::onClose', '7f0000010b56000...')
+#5 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 /var/www/html/game/vendor/workerman/workerman/Connection/TcpConnection.php(480): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#7 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #55, Object(Workerman\Events\React\ExtEventLoop))
+#8 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(319): call_user_func(Array, Resource id #55, Object(Workerman\Events\React\ExtEventLoop))
+#9 [internal function]: React\EventLoop\ExtEventLoop->React\EventLoop\{closure}(Resource id #55, 2, NULL)
+#10 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(205): EventBase->loop(1)
+#11 /var/www/html/game/vendor/workerman/workerman/Events/React.php(122): React\EventLoop\ExtEventLoop->run()
+#12 /var/www/html/game/vendor/workerman/workerman/Worker.php(1537): Workerman\Events\React->loop()
+#13 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(183): Workerman\Worker->run()
+#14 /var/www/html/game/vendor/workerman/workerman/Worker.php(936): GatewayWorker\BusinessWorker->run()
+#15 /var/www/html/game/vendor/workerman/workerman/Worker.php(899): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#16 /var/www/html/game/vendor/workerman/workerman/Worker.php(431): Workerman\Worker::forkWorkers()
+#17 /var/www/html/game/start.php(37): Workerman\Worker::runAll()
+#18 {main}
+2017-04-14 07:47:25 pid:11774 WORKER EXIT UNEXPECTED 
+2017-04-14 07:47:25 pid:11771 worker[YourAppBusinessWorker:11774] exit with status 64000
+2017-04-14 07:48:02 pid:11772 exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'client_id'' in /var/www/html/game/vendor/workerman/mysql/src/Connection.php:1740
+Stack trace:
+#0 /var/www/html/game/vendor/workerman/mysql/src/Connection.php(1740): PDOStatement->execute()
+#1 /var/www/html/game/vendor/workerman/mysql/src/Connection.php(1820): Workerman\MySQL\Connection->execute('UPDATE `client`...', Array)
+#2 /var/www/html/game/Applications/five/Events.php(481): Workerman\MySQL\Connection->query()
+#3 [internal function]: Events::onClose('7f0000010b55000...')
+#4 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(374): call_user_func('Events::onClose', '7f0000010b55000...')
+#5 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 /var/www/html/game/vendor/workerman/workerman/Connection/TcpConnection.php(480): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#7 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #60, Object(Workerman\Events\React\ExtEventLoop))
+#8 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(319): call_user_func(Array, Resource id #60, Object(Workerman\Events\React\ExtEventLoop))
+#9 [internal function]: React\EventLoop\ExtEventLoop->React\EventLoop\{closure}(Resource id #60, 2, NULL)
+#10 /var/www/html/game/vendor/react/event-loop/src/ExtEventLoop.php(205): EventBase->loop(1)
+#11 /var/www/html/game/vendor/workerman/workerman/Events/React.php(122): React\EventLoop\ExtEventLoop->run()
+#12 /var/www/html/game/vendor/workerman/workerman/Worker.php(1537): Workerman\Events\React->loop()
+#13 /var/www/html/game/vendor/workerman/gateway-worker/src/BusinessWorker.php(183): Workerman\Worker->run()
+#14 /var/www/html/game/vendor/workerman/workerman/Worker.php(936): GatewayWorker\BusinessWorker->run()
+#15 /var/www/html/game/vendor/workerman/workerman/Worker.php(899): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#16 /var/www/html/game/vendor/workerman/workerman/Worker.php(431): Workerman\Worker::forkWorkers()
+#17 /var/www/html/game/start.php(37): Workerman\Worker::runAll()
+#18 {main}
+2017-04-14 07:48:02 pid:11772 WORKER EXIT UNEXPECTED 
+2017-04-14 07:48:02 pid:11771 worker[YourAppBusinessWorker:11772] exit with status 64000
+2017-04-14 07:53:04 pid:11771 Workerman[start.php] Stopping ...
+2017-04-14 07:53:04 pid:11771 Workerman[start.php] has been stopped
+2017-04-14 08:09:58 pid:16122 Workerman[start.php] start in DEBUG mode
+2017-04-14 08:14:17 pid:16122 Workerman[start.php] Stopping ...
+2017-04-14 08:14:17 pid:16122 Workerman[start.php] has been stopped
+2017-04-14 08:18:51 pid:17633 Workerman[start.php] start in DEBUG mode
+2017-04-14 08:20:27 pid:17633 Workerman[start.php] Stopping ...
+2017-04-14 08:20:27 pid:17633 Workerman[start.php] has been stopped
+2017-04-14 08:21:01 pid:18089 Workerman[start.php] start in DEBUG mode
+2017-04-14 08:26:12 pid:18089 Workerman[start.php] Stopping ...
+2017-04-14 08:26:12 pid:18089 Workerman[start.php] has been stopped
+2017-04-14 08:26:15 pid:19140 Workerman[start.php] start in DEBUG mode
+2017-04-14 08:28:34 pid:19140 Workerman[start.php] Stopping ...
+2017-04-14 08:28:34 pid:19140 Workerman[start.php] has been stopped
+2017-04-14 08:28:36 pid:19534 Workerman[start.php] start in DEBUG mode
+2017-04-14 08:30:47 pid:19534 Workerman[start.php] Stopping ...
+2017-04-14 08:30:47 pid:19534 Workerman[start.php] has been stopped
+2017-04-14 11:58:00 pid:19702 Workerman[start.php] start in DEBUG mode
+2017-04-14 12:44:08 pid:19702 Workerman[start.php] Stopping ...
+2017-04-14 12:44:08 pid:19702 Workerman[start.php] has been stopped
+2017-04-14 12:55:09 pid:28962 Workerman[start.php] start in DEBUG mode
+2017-04-14 14:50:20 pid:28962 Workerman[start.php] Stopping ...
+2017-04-14 14:50:20 pid:28962 Workerman[start.php] has been stopped
+2017-04-14 14:50:22 pid:14893 Workerman[start.php] start in DEBUG mode
+2017-04-14 14:55:52 pid:14893 Workerman[start.php] Stopping ...
+2017-04-14 14:55:52 pid:14893 Workerman[start.php] has been stopped
+2017-04-14 14:55:55 pid:15777 Workerman[start.php] start in DEBUG mode
+2017-04-14 15:07:00 pid:15777 Workerman[start.php] Stopping ...
+2017-04-14 15:07:00 pid:15777 Workerman[start.php] has been stopped
+2017-04-14 15:07:54 pid:17785 Workerman[start.php] start in DEBUG mode
+2017-04-14 15:38:16 pid:17785 Workerman[start.php] Stopping ...
+2017-04-14 15:38:16 pid:17785 Workerman[start.php] has been stopped
+2017-04-14 15:38:18 pid:22613 Workerman[start.php] start in DEBUG mode
+2017-04-14 15:45:23 pid:22613 Workerman[start.php] Stopping ...
+2017-04-14 15:45:23 pid:22613 Workerman[start.php] has been stopped
+2017-04-14 15:45:25 pid:23785 Workerman[start.php] start in DEBUG mode
+2017-04-14 15:47:08 pid:23785 Workerman[start.php] Stopping ...
+2017-04-14 15:47:08 pid:23785 Workerman[start.php] has been stopped
+2017-04-14 15:47:10 pid:24099 Workerman[start.php] start in DEBUG mode
+2017-04-14 15:51:07 pid:24099 Workerman[start.php] Stopping ...
+2017-04-14 15:51:07 pid:24099 Workerman[start.php] has been stopped
+2017-04-14 15:51:36 pid:24854 Workerman[start.php] start in DEBUG mode
+2017-04-14 15:52:20 pid:24854 Workerman[start.php] Stopping ...
+2017-04-14 15:52:20 pid:24854 Workerman[start.php] has been stopped
+2017-04-14 15:52:22 pid:25007 Workerman[start.php] start in DEBUG mode
+2017-04-14 16:03:06 pid:25007 Workerman[start.php] Stopping ...
+2017-04-14 16:03:06 pid:25007 Workerman[start.php] has been stopped
+2017-04-14 16:03:08 pid:26723 Workerman[start.php] start in DEBUG mode
+2017-04-14 16:11:20 pid:26723 Workerman[start.php] Stopping ...
+2017-04-14 16:11:20 pid:26723 Workerman[start.php] has been stopped
+2017-04-14 16:11:22 pid:28093 Workerman[start.php] start in DEBUG mode
+2017-04-14 16:14:51 pid:28093 Workerman[start.php] Stopping ...
+2017-04-14 16:14:51 pid:28093 Workerman[start.php] has been stopped
+2017-04-14 16:14:53 pid:28717 Workerman[start.php] start in DEBUG mode
+2017-04-14 16:16:47 pid:28717 Workerman[start.php] Stopping ...
+2017-04-14 16:16:47 pid:28717 Workerman[start.php] has been stopped
+2017-04-14 16:16:49 pid:29064 Workerman[start.php] start in DEBUG mode
+2017-04-14 16:25:00 pid:29064 Workerman[start.php] Stopping ...
+2017-04-14 16:25:00 pid:29064 Workerman[start.php] has been stopped
+2017-04-14 16:25:02 pid:30398 Workerman[start.php] start in DEBUG mode
+2017-04-14 16:31:46 pid:30398 Workerman[start.php] Stopping ...
+2017-04-14 16:31:46 pid:30398 Workerman[start.php] has been stopped
+2017-04-14 16:31:48 pid:31496 Workerman[start.php] start in DEBUG mode
+2017-04-14 16:41:34 pid:31496 Workerman[start.php] Stopping ...
+2017-04-14 16:41:34 pid:31496 Workerman[start.php] has been stopped
+2017-04-14 16:41:38 pid:632 Workerman[start.php] start in DEBUG mode
+2017-04-14 16:51:49 pid:632 Workerman[start.php] Stopping ...
+2017-04-14 16:51:49 pid:632 Workerman[start.php] has been stopped
+2017-04-14 16:51:53 pid:2635 Workerman[start.php] start in DEBUG mode
+2017-04-14 16:55:15 pid:2635 Workerman[start.php] Stopping ...
+2017-04-14 16:55:15 pid:2635 Workerman[start.php] has been stopped
+2017-04-14 16:55:17 pid:3219 Workerman[start.php] start in DEBUG mode
+2017-04-14 17:10:33 pid:3219 Workerman[start.php] Stopping ...
+2017-04-14 17:10:33 pid:3219 Workerman[start.php] has been stopped
+2017-04-14 17:10:35 pid:5890 Workerman[start.php] start in DEBUG mode
+2017-04-14 17:14:44 pid:5890 Workerman[start.php] Stopping ...
+2017-04-14 17:14:44 pid:5890 Workerman[start.php] has been stopped
+2017-04-14 17:14:46 pid:6595 Workerman[start.php] start in DEBUG mode
+2017-04-14 17:19:04 pid:6595 Workerman[start.php] Stopping ...
+2017-04-14 17:19:04 pid:6595 Workerman[start.php] has been stopped

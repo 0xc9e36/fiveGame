@@ -51,7 +51,7 @@ class Events{
        // debug
        //echo "client:{$_SERVER['REMOTE_ADDR']}:{$_SERVER['REMOTE_PORT']} gateway:{$_SERVER['GATEWAY_ADDR']}:{$_SERVER['GATEWAY_PORT']}  client_id:$client_id session:".json_encode($_SESSION)." onMessage:".$message."\n";
 
-       // 解析为数组格式
+       // 解析数据,  数组格式
        $message_data = json_decode($message, true);
 
        if(!$message_data) return ;
@@ -71,11 +71,12 @@ class Events{
                 $room_id = $message_data['room_id'];
                 $client_logo = $message_data['client_logo'];
                 $client_name = htmlspecialchars($message_data['client_name']);
-                //var_dump($client_name);
+
                 $_SESSION['room_id'] = $room_id;
                 $_SESSION['client_name'] = $client_name;
                 $_SESSION['client_logo'] = $client_logo;
-                //连接标识,  1代表大厅
+
+                //连接标识,  1代表大厅, 2代表棋桌
                 $_SESSION['is_room'] = 1;
 
                //数据库保存连接
@@ -145,7 +146,7 @@ class Events{
                // 玩家空闲  1  玩家已加入游戏  2
                //玩家已经在游戏状态
                $desk = self::$db->select('game_id')->from('client')->where('client_id= :client_id')->bindValues(array('client_id'=> $client_id))->single();
-               var_dump($desk);
+               //var_dump($desk);
                if($desk){
                    $message = [
                        'type'=>'sit',
@@ -166,11 +167,7 @@ class Events{
                    'url'        =>  'client.php?client_id='.$client_id.'&room_id='.$room_id.'&color='.$message_data['color'].'&desk_id='.$message_data['desk_id'], //跳转地址
                ]));
 
-               //维护房间桌子状态
-               $desk_id = $message_data['desk_id'];
-               $color = $message_data['color'].'_id';
-
-               //更新桌子状态
+               //更新房间桌子状态
                $message = [
                    'type'=>'sit',
                    'status' =>  1,
@@ -218,7 +215,9 @@ class Events{
                $_SESSION['color'] = $message_data['color'];
                $_SESSION['room_id'] = $room_id;
                $_SESSION['desk_id'] = $desk_id;
+               $_SESSION['room_client_id'] = $message_data['room_client_id'];
 
+               var_dump($_SESSION['color']);
                //加入两人游戏分组
                Gateway::joinGroup($client_id, 'room'.$room_id.'desk'.$desk_id);
 
@@ -227,32 +226,13 @@ class Events{
 
                //记录game_id
                self::$db->query("INSERT INTO `desk` (room_id, desk_id, $color) VALUES('$room_id','$desk_id','$client_id') ON DUPLICATE KEY UPDATE `$color` = '$client_id'");
+
                $competitor = [];
                //查找对手
-               if('white' == $message_data['color']){
-                   $competitor = self::$db
-                       ->select("client_id, start, client_logo, client_name, game_id,  'black' as color")
-                       ->from('client')
-                       ->innerJoin('desk','desk.black_id = client.game_id')
-                       ->where("room_id = :room_id AND black_id <> ''")
-                       ->bindValues(['room_id' => $room_id])
-                       ->row();
-               }else if('black' == $message_data['color']){
-
-                   $competitor = self::$db
-                       ->select("client_id, start, client_logo, client_name, game_id,  'white' as color")
-                       ->from('client')
-                       ->innerJoin('desk','desk.white_id = client.game_id')
-                       ->where("room_id = :room_id AND white_id <> ''")
-                       ->bindValues(['room_id' => $room_id])
-                       ->row();
-               }
-
-               //debug
-               //var_dump($competitor);
+               $competitor = self::get_competitor($room_id, $message_data['color']);
 
                $res = [
-                   'status'    =>  0,  //玩家进入房间
+                   'type'   =>  'self_entry',
                    'msg'   =>  '',
                    'data'  =>  [
                        'color'      =>  $color,
@@ -264,7 +244,6 @@ class Events{
                    ],
                ];
 
-               //var_dump($res);
                Gateway::sendToCurrentClient(json_encode($res));
 
                // 更新房间棋桌
@@ -272,41 +251,14 @@ class Events{
 
                //通知对手玩家进入房间
                if($competitor){
+                   $client['color'] = $_SESSION['color'];
                    $data = [
-                       'status'    =>  1,  //对手信息设置
+                       'type'      =>   'competitor_entry',
                        'data'  =>  [
                            'competitor'  => $client,
-                           /*
-                           'chessboard'  =>  $chessboard,
-                           'msg'   =>  '双方玩家已就绪, 现在开始游戏...',
-                           'competitor_id' =>  $competitor['game_id'], //对手
-                           */
                        ],
                    ];
-                   var_dump($data);
                    Gateway::sendToClient($competitor['game_id'], json_encode($data));
-                   /*
-                   $move = $message_data['color'] == 'black' ? 1 : 0;
-                   $c = $message_data['color'] == 'white' ? 1 : 0;
-                   $chessboard = json_encode($chessboard);
-                   //设置当前玩家
-                   self::$db->query("UPDATE `client` SET `move` = '$move',chessboard = '$chessboard'  WHERE game_id='$client_id'");
-
-                   echo "1  : UPDATE `client` SET `move` = '$move',chessboard = '$chessboard'  WHERE game_id='$client_id'";
-                   //设置对手
-                   self::$db->query("UPDATE `client` SET `move` = '$c',chessboard = '$chessboard'  WHERE game_id='{$competitor['game_id']}'");
-
-                   echo "2  : UPDATE `client` SET `move` = '$c',chessboard = '$chessboard'  WHERE game_id='$client_id'";
-
-                   Gateway::sendToCurrentClient(json_encode($data));
-                   $data['data']['competitor'] = [
-                       'color'      =>  $message_data['color'],
-                       'client_name' => $client['client_name'],
-                       'client_logo' => $client['client_logo'],
-                   ];
-                   $data['data']['competitor_id'] = $client_id;
-                   Gateway::sendToClient($competitor['game_id'], json_encode($data));
-                   */
                }
 
            break;
@@ -316,34 +268,17 @@ class Events{
            case 'start' :
 
                //获取当前玩家信息
-               $client = self::$db->select('client_name,client_logo')->from('client')->where('client_id= :client_id')->bindValues(array('client_id'=> $message_data['room_client_id']))->row();
-
-               $_SESSION['is_start'] = 1;
+               //$client = self::$db->select('client_name,client_logo')->from('client')->where('client_id= :client_id')->bindValues(array('client_id'=> $message_data['room_client_id']))->row();
 
                //玩家准备
-               self::$db->update('client')->cols(array('start'))->where("client_id='{$message_data['room_client_id']}'")->bindValue('start', '1')->query();
+               self::$db->update('client')->cols(array('start'))->where("game_id='$client_id'")->bindValue('start', '1')->query();
 
-               $competitor = [];
-               //查看对手是否准备
-               if('white' == $message_data['color']){
-                   $competitor = self::$db
-                       ->select("client_id, start, client_logo, client_name, game_id,  'black' as color")
-                       ->from('client')
-                       ->innerJoin('desk','desk.black_id = client.game_id')
-                       ->where("room_id = :room_id AND black_id <> ''")
-                       ->bindValues(['room_id' => $_SESSION['room_id']])
-                       ->row();
-               }else if('black' == $message_data['color']){
+               $competitor = self::get_competitor($_SESSION['room_id'] ,$_SESSION['color']);
 
-                   $competitor = self::$db
-                       ->select("client_id, start, client_logo, client_name, game_id,  'white' as color")
-                       ->from('client')
-                       ->innerJoin('desk','desk.white_id = client.game_id')
-                       ->where("room_id = :room_id AND white_id <> ''")
-                       ->bindValues(['room_id' => $_SESSION['room_id']])
-                       ->row();
-               }
-               //对手存在并且已经准备好
+               var_dump($competitor);
+
+
+               //初始化各种数据.
                if($competitor && 1 == $competitor['start']){
 
                    //初始化棋盘   15 x 15
@@ -356,30 +291,32 @@ class Events{
                    }
 
                    $data = [
-                       'status'    =>  2,  //准备开始游戏
+                       'type'    =>  'start',  //准备开始游戏
                        'data'  =>  [
                            'chessboard'  =>  $chessboard,
                            'msg'   =>  '双方玩家已就绪, 现在开始游戏...',
                            'competitor_id' =>  $competitor['game_id'], //对手
                        ],
                    ];
-                   $move = $message_data['color'] == 'black' ? 1 : 0;
-                   $c = $message_data['color'] == 'white' ? 1 : 0;
+                   $move = $_SESSION['color'] == 'black' ? 1 : 0;
+                   $other_move = $_SESSION['color'] == 'white' ? 1 : 0;
+
+                   //var_dump($move);
                    $chessboard = json_encode($chessboard);
-                   //设置当前玩家
+                   //设置当前玩家  先手  棋盘
                    self::$db->query("UPDATE `client` SET `move` = '$move',chessboard = '$chessboard'  WHERE game_id='$client_id'");
 
-                   echo "1  : UPDATE `client` SET `move` = '$move',chessboard = '$chessboard'  WHERE game_id='$client_id'";
+                   //echo "1  : UPDATE `client` SET `move` = '$move',chessboard = '$chessboard'  WHERE game_id='$client_id'";
                    //设置对手
-                   self::$db->query("UPDATE `client` SET `move` = '$c',chessboard = '$chessboard'  WHERE game_id='{$competitor['game_id']}'");
+                   self::$db->query("UPDATE `client` SET `move` = '$other_move',chessboard = '$chessboard'  WHERE game_id='{$competitor['game_id']}'");
 
-                   echo "2  : UPDATE `client` SET `move` = '$c',chessboard = '$chessboard'  WHERE game_id='$client_id'";
+                   //echo "2  : UPDATE `client` SET `move` = '$c',chessboard = '$chessboard'  WHERE game_id='$client_id'";
 
                    Gateway::sendToCurrentClient(json_encode($data));
                    $data['data']['competitor'] = [
-                       'color'      =>  $message_data['color'],
-                       'client_name' => $client['client_name'],
-                       'client_logo' => $client['client_logo'],
+                       'color'      =>  $_SESSION['color'],
+                       'client_name' => $_SESSION['client_name'],
+                       'client_logo' => $_SESSION['client_logo'],
                    ];
                    $data['data']['competitor_id'] = $client_id;
                    Gateway::sendToClient($competitor['game_id'], json_encode($data));
@@ -388,22 +325,22 @@ class Events{
 
            //游戏中...
            case 'play' :
-               $competitor =  self::$db->select('client_name, start, move, chessboard')->from('client')->where("game_id= :id AND game_id <> ''")->bindValues(array('id'=> $message_data['competitor']))->row();
 
+               //对手信息
+               $competitor =  self::$db->select('client_name, start, move, chessboard')->from('client')->where("game_id= :id AND game_id <> ''")->bindValues(array('id'=> $message_data['competitor']))->row();
+               //当前玩家信息
                $self = self::$db->select('client_name, start, move, chessboard')->from('client')->where('game_id= :id')->bindValues(array('id'=> $client_id))->row();
-               //设置对手
+
                $id = $message_data['competitor'];
                if( 3 == $message_data['status'] && $competitor && 1 == $self['start'] && 1 == $competitor['start']){
 
                    if(0 == $self['move']){
-                       // var_dump($one + " : " + $two);
                        $res = [
-                           'status'    =>  4,  //不是自己下棋
+                           'type'    =>  'ban',  //不是自己下棋
                            'msg'   =>  '等待对手下棋',
                        ];
                        return Gateway::sendToCurrentClient(json_encode($res));
                    }
-
 
                    //当前棋局
                    $cur_chess_board = json_decode($competitor['chessboard']);
@@ -413,18 +350,20 @@ class Events{
                    if(!$coordinate) return ;
                    $x = $coordinate[0];
                    $y = $coordinate[1];
+
                    if($cur_chess_board[$x][$y] != 0) return ;
+
                    //更新棋局  1 黑棋 2 白棋
                    $cur_chess_board[$x][$y] = $_SESSION['color'] == 'black' ? 1 : 2;
 
                    $chess = json_encode($cur_chess_board);
-                   //设置当前玩家
+
+                   //设置交换行棋顺序
                    self::$db->query("UPDATE `client` SET `move` = '0',`chessboard` = '$chess'  WHERE game_id='$client_id'");
                    self::$db->query("UPDATE `client` SET `move` = '1',`chessboard` = '$chess'  WHERE game_id='$id'");
 
-                  // var_dump($one + " : " + $two);
                    $res = [
-                       'status'    =>  3,  //正在开始游戏
+                       'type'    =>  'playing',  //正在开始游戏
                        'msg'   =>  '',
                        'data'  =>  [
                            'chessboard'  =>  $cur_chess_board,
@@ -438,9 +377,8 @@ class Events{
 
                    //判断胜负
                    if(self::get_win($_SESSION['color'], $cur_chess_board)){
-                       //$win = $_SESSION['color'] == 'black' ? '黑棋' : '白棋';
                        $info = [
-                           'status'    =>  5,  //游戏结束
+                           'type'    =>  'finish',  //游戏结束
                            'data'       =>[
                                'msg'   =>  '五子连珠, 你获得了胜利',
                            ]
@@ -449,7 +387,6 @@ class Events{
                        self::$db->update('client')->cols(['start' => 0])->where("game_id='$client_id'")->query();
                        self::$db->update('client')->cols(['start' => 0])->where("game_id='$id'")->query();
 
-                       $_SESSION['is_win'] = 1;
                        Gateway::sendToCurrentClient(json_encode($info));
 
                        $info['data']['msg']  = '你输了哦.';
@@ -458,10 +395,56 @@ class Events{
 
                }else{
                    Gateway::sendToCurrentClient(json_encode([
+                       'type'     =>      'ban',
+                       'msg'        =>      '双方玩家还没有准备就绪哦',
+                   ]));
+               }
+           break;
+
+           //玩家认输
+           case 'end' :
+               //对手信息
+               $self = self::$db->row("SELECT client_id, game_id, start FROM client WHERE game_id='$client_id'");
+               $competitor = self::get_competitor($_SESSION['room_id'], $_SESSION['color']);
+
+               if(isset($competitor) && 1 == $self['start'] && 1 == $competitor['start']){
+                   $id = $competitor['game_id'];
+                   $info = [
+                       'type'    =>  'finish',  //游戏结束
+                       'data'       =>[
+                           'status' => 1,
+                           'msg'   =>  '游戏结束, 请选择操作',
+                       ]
+                   ];
+
+                   //更新状态
+                   self::$db->update('client')->cols(['start' => 0])->where("game_id='$client_id'")->query();
+                   self::$db->update('client')->cols(['start' => 0])->where("game_id='$id'")->query();
+
+                   Gateway::sendToCurrentClient(json_encode($info));
+
+                   $info['data']['msg']  = '对方玩家向你认输.';
+                   Gateway::sendToClient($id, json_encode($info));
+               }else{
+                   Gateway::sendToCurrentClient(json_encode([
                        'status'     =>      6,
                        'msg'        =>      '双方玩家还没有准备就绪哦',
                    ]));
                }
+           break;
+
+           //玩家离开房间,  发消息给对手
+           case 'out' :
+               // 非法请求
+               if(!isset($_SESSION['room_id'])) {
+                   throw new \Exception("非法操作. 客户端ip:{$_SERVER['REMOTE_ADDR']}");
+               }
+
+               var_dump($message_data);
+               $id = $message_data['competitor'];
+               Gateway::sendToClient($id, json_encode([
+                   'type'   =>  'out',
+               ]));
            break;
 
        }
@@ -473,46 +456,49 @@ class Events{
     */
    public static function onClose($client_id) {
        // debug
-       echo "client:{$_SERVER['REMOTE_ADDR']}:{$_SERVER['REMOTE_PORT']} gateway:{$_SERVER['GATEWAY_ADDR']}:{$_SERVER['GATEWAY_PORT']}  client_id:$client_id onClose:''\n";
+       //echo "client:{$_SERVER['REMOTE_ADDR']}:{$_SERVER['REMOTE_PORT']} gateway:{$_SERVER['GATEWAY_ADDR']}:{$_SERVER['GATEWAY_PORT']}  client_id:$client_id onClose:''\n";
 
+       //连接的用户信息
        $client = self::$db->row("SELECT client_id, game_id, start FROM client WHERE client_id = '$client_id' OR game_id='$client_id'");
 
        // 离开房间 or 玩家逃跑
        if(isset($_SESSION['is_game']))
        {
-           //清除游戏连接
+           //棋桌状态改变
            if('white' == $_SESSION['color']){
-               self::$db->update('desk')->cols(['white_id' => NULL])->where("white_id='$client_id'")->query();
+               self::$db->update('desk')->cols(['white_id' => ''])->where("white_id='$client_id'")->query();
            } else if('black' == $_SESSION['color']){
-               self::$db->update('desk')->cols(['black_id' => NULL])->where("black_id='$client_id'")->query();
+               self::$db->update('desk')->cols(['black_id' => ''])->where("black_id='$client_id'")->query();
            }
 
             //删除房间连接
            if($client['client_id'] == ''){
                self::$db->delete('client')->where("game_id='$client_id' AND client_id = ''")->query();
            }else{
-               self::$db->update('client')->cols(['game_id' => NULL, 'move' => 0, 'start' => 0])->where("game_id='$client_id'")->query();
+               self::$db->update('client')->cols(['game_id' => '', 'move' => 0, 'start' => 0])->where("game_id='$client_id'")->query();
            }
 
-           //发送玩家逃跑信息
+           //给对手发送玩家离线信息
            $group = 'room'.$_SESSION['room_id'].'desk'.$_SESSION['desk_id'];
-           // 这里有问题,  不太确定是不是比实际少一个
-           if(1 == $client['start'] && Gateway::getClientCountByGroup($group) >= 1){
-               $status = 0;
-               $msg = '对方逃跑, 确定继续等待其它玩家加入,  离开将关闭本页面?';
-           }else{
-               $status = 1;
-               $msg = '';
+           $competitor = [];
+           $competitor = self::get_competitor($_SESSION['room_id'] ,$_SESSION['color']);
+
+           // 这里有问题,  不太确定连接是不是比实际少一个  0 为空闲状态 1 为游戏中状态
+           if(1 == $client['start'] && Gateway::getClientCountByGroup($group) >= 1 && 1 == $competitor['start']){
+               Gateway::sendToGroup($group, json_encode([
+                   'type'   =>  'finish',
+                   'data'   =>[
+                       'status' => 2,
+                       'msg'   =>  '对方逃跑, 确定继续等待其它玩家加入,  离开将关闭本页面?',
+                   ]
+               ]));
            }
-           var_dump("退出方式为".$status);
+
            Gateway::sendToGroup($group, json_encode([
                'type'   =>  'out',
-               'data'   =>[
-                   'status' =>  $status,
-                   'msg'   =>  $msg,
-               ]
            ]));
 
+           /*更新棋桌*/
            $message = [
                'type'               =>      'out',
                'client_logo'        =>      $_SESSION['client_logo'],
@@ -521,23 +507,21 @@ class Events{
                'desk_id'            =>  $_SESSION['desk_id'],
                'color'            =>  $_SESSION['color'],
            ];
-           var_dump("房间id为".$_SESSION['room_id']);
            Gateway::sendToGroup($_SESSION['room_id'], json_encode($message));
 
-       }else if(isset($_SESSION['is_room'])) {
-           var_dump('退出房间');
+       }else if(isset($_SESSION['is_room'])) {      //退出游戏大厅
            $room_id = $_SESSION['room_id'];
 
            //桌子的状态改变
            if('white' == $_SESSION['color'])
-               self::$db->update('desk')->cols(['white_id' => NULL])->where("white_id='$client_id'")->query();
+               self::$db->update('desk')->cols(['white_id' => ''])->where("white_id='$client_id'")->query();
            else if('black' == $_SESSION['color'])
-               self::$db->update('desk')->cols(['black_id' => NULL])->where("black_id='$client_id'")->query();
+               self::$db->update('desk')->cols(['black_id' => ''])->where("black_id='$client_id'")->query();
 
            if($client['game_id'] == ''){
                self::$db->delete('client')->where("client_id='$client_id' AND game_id = ''")->query();
            }else{
-               self::$db->update('client')->cols(['client_id' => NULL])->where("client_id='$client_id'")->query();
+               self::$db->update('client')->cols(['client_id' => ''])->where("client_id='$client_id'")->query();
            }
 
            $message = [
@@ -561,10 +545,11 @@ class Events{
     public static function get_win($color, $chessboard){
 
         $flag = $color == 'black' ? 1 : 2;
+        var_dump($flag);
         // 判断 x 方向
         for($y = 0; $y < 15; $y++){
             for($x = 0; $x < 11; $x++){
-                if($flag = $chessboard[$x][$y] && $flag = $chessboard[$x + 1][$y] && $flag = $chessboard[$x + 2][$y] && $flag = $chessboard[$x + 3][$y] && $flag = $chessboard[$x + 4][$y]){
+                if($flag == $chessboard[$x][$y] && $flag ==$chessboard[$x + 1][$y] && $flag == $chessboard[$x + 2][$y] && $flag == $chessboard[$x + 3][$y] && $flag == $chessboard[$x + 4][$y]){
                     return true;
                 }
             }
@@ -573,7 +558,7 @@ class Events{
         // 判断  y方向
         for($y = 0; $y < 11; $y++){
             for($x = 0; $x < 15; $x++){
-                if($flag = $chessboard[$x][$y] && $flag = $chessboard[$x][$y + 1] && $flag = $chessboard[$x][$y + 2] && $flag = $chessboard[$x][$y + 3] && $flag = $chessboard[$x][$y + 4]){
+                if($flag == $chessboard[$x][$y] && $flag == $chessboard[$x][$y + 1] && $flag == $chessboard[$x][$y + 2] && $flag == $chessboard[$x][$y + 3] && $flag == $chessboard[$x][$y + 4]){
                     return true;
                 }
             }
@@ -582,7 +567,7 @@ class Events{
         // 判断   \  方向
         for($y = 0; $y < 11; $y++){
             for($x = 0; $x < 11; $x++){
-                if($flag = $chessboard[$x][$y] && $flag = $chessboard[$x + 1][$y + 1] && $flag = $chessboard[$x + 2][$y + 2] && $flag = $chessboard[$x + 3][$y + 3] && $flag = $chessboard[$x + 4][$y + 4]){
+                if($flag == $chessboard[$x][$y] && $flag == $chessboard[$x + 1][$y + 1] && $flag == $chessboard[$x + 2][$y + 2] && $flag == $chessboard[$x + 3][$y + 3] && $flag == $chessboard[$x + 4][$y + 4]){
                     return true;
                 }
             }
@@ -591,12 +576,36 @@ class Events{
         //判断 / 方向
         for($y = 0; $y < 11; $y++){
             for($x = 4; $x < 15; $x++){
-                if($flag = $chessboard[$x][$y] && $flag = $chessboard[$x - 1][$y + 1] && $flag = $chessboard[$x - 2][$y + 2] && $flag = $chessboard[$x - 3][$y + 3] && $flag = $chessboard[$x - 4][$y + 4]){
+                if($flag == $chessboard[$x][$y] && $flag == $chessboard[$x - 1][$y + 1] && $flag == $chessboard[$x - 2][$y + 2] && $flag == $chessboard[$x - 3][$y + 3] && $flag == $chessboard[$x - 4][$y + 4]){
                     return true;
                 }
             }
         }
         return false;
+    }
+
+
+    //获取对手信息
+    public static function get_competitor($room_id, $color){
+        $competitor = [];
+        if('white' == $color){
+            $competitor = self::$db
+                ->select("client_id, start, client_logo, client_name, game_id,  'black' as color")
+                ->from('client')
+                ->innerJoin('desk','desk.black_id = client.game_id')
+                ->where("room_id = :room_id AND black_id <> ''")
+                ->bindValues(['room_id' => $room_id])
+                ->row();
+        }else if('black' == $color){
+            $competitor = self::$db
+                ->select("client_id, start, client_logo, client_name, game_id,  'white' as color")
+                ->from('client')
+                ->innerJoin('desk','desk.white_id = client.game_id')
+                ->where("room_id = :room_id AND white_id <> ''")
+                ->bindValues(['room_id' => $room_id])
+                ->row();
+        }
+        return $competitor;
     }
 
 }
