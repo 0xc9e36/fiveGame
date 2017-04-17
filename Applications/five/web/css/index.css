@@ -1,4 +1,8 @@
-.main{  margin-top: 10px;  font-family: 微软雅黑;  }
+
+.main{background: rgba(255,255,255,0.5);  margin-top: 10px;  font-family: 微软雅黑;  }
+
+/*树形菜单样式*/
+body .layui-tree-skin-menu .layui-tree-branch{color: #EDCA50;}
 
 /*房间列表*/
 .room-list{  float: left;  height: 500px;  background: #f2f2f2;  border-right: 1px solid slategray;  }

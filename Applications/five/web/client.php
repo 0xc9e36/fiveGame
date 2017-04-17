@@ -24,9 +24,9 @@
                     <span class="chess-info">
                         <ul>
                             <li>昵称 : <span class="client_name"></span></li>
-                            <li>限时 : 15-00</li>
-                            <li>倒计时: 15-00</li>
-                            <li>比分 : 15-00</li>
+                            <li>限时 : <span class="max_time"></li>
+                            <li>倒计时: <span class="white_time"></span></li>
+                            <li>比分 : </li>
                         </ul>
                     </span>
                 </div>
@@ -39,9 +39,9 @@
                     <span class="chess-info">
                         <ul>
                             <li>昵称 : <span class="client_name"></span></li>
-                            <li>限时 : 15-00</li>
-                            <li>倒计时: 15-00</li>
-                            <li>比分 : 15-00</li>
+                            <li>限时 : <span class="max_time"></li>
+                            <li>倒计时: <span class="black_time"></span></li>
+                            <li>比分 : </li>
                         </ul>
                     </span>
                     </span>
@@ -70,14 +70,17 @@
                 <span class="detail-right">
                     <ul>
                         <li>昵称 : <span class="cur_name"></span></li>
-                        <li>限时 : 15-00</li>
-                        <li>倒计时: 15-00</li>
-                        <li>比分 : 15-00</li>
+                        <li>限时 : <span class="max_time"></span></li>
+                        <li>倒计时: <span id="time"></span></li>
+                        <li>比分 : </li>
                     </ul>
                 </span>
             </div>
         </div>
-        <div class="chess-chat">玩家聊天信息~ 即将实现</div>
+        <div class="chess-chat">
+            <center><b>游戏说明 : </b></center>
+            <p style="text-indent: 2em">玩家首先进入房间, 双方准备后方可开始游戏.  游戏过程中注意不要超时 !</p>
+        </div>
     </span>
 </div>
 <div style="clear: both"></div>

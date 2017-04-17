@@ -25,6 +25,7 @@ window.onload = function () {
     function room_list(){
         layui.tree({
             elem: '#demo' //传入元素选择器
+            ,skin: 'menu'
             ,nodes: room
             ,target: '_blank'
             ,

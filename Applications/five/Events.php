@@ -215,6 +215,8 @@ class Events{
                $_SESSION['color'] = $message_data['color'];
                $_SESSION['room_id'] = $room_id;
                $_SESSION['desk_id'] = $desk_id;
+               $_SESSION['client_name'] = $client['client_name'];
+               $_SESSION['client_logo'] = $client['client_logo'];
                $_SESSION['room_client_id'] = $message_data['room_client_id'];
 
                var_dump($_SESSION['color']);
@@ -422,12 +424,15 @@ class Events{
                    self::$db->update('client')->cols(['start' => 0])->where("game_id='$id'")->query();
 
                    Gateway::sendToCurrentClient(json_encode($info));
-
-                   $info['data']['msg']  = '对方玩家向你认输.';
+                   if(isset($message_data['time']) && 'over' == $message_data['time']){
+                       $info['data']['msg']  = '对方玩家超时.';
+                   }else{
+                       $info['data']['msg']  = '对方玩家向你认输.';
+                   }
                    Gateway::sendToClient($id, json_encode($info));
                }else{
                    Gateway::sendToCurrentClient(json_encode([
-                       'status'     =>      6,
+                       'type'     =>      'ban',
                        'msg'        =>      '双方玩家还没有准备就绪哦',
                    ]));
                }

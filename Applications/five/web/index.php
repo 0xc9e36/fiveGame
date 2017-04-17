@@ -14,6 +14,7 @@
 <body>
     <ul class="layui-nav" lay-filter="">
         <li class="layui-nav-item layui-this"><a href="">首页</a></li>
+        <li class="layui-nav-item layui-this"><a href="https://github.com/tw1996/fiveGame">源码</a></li>
     </ul>
     <hr>
     &nbsp;&nbsp;<a name="default">你好, 欢迎来到五子棋.</a>
@@ -23,9 +24,9 @@
             <span class="game-introduction">
                     <div class="game-introduction-title">说明</div>
                     <ul>
-                        <li>基于websocket长连接,前端使用layui框架, 后端使用Workerman + MYSQL数据库</li>
+                        <li>websocket长连接,前端使用layui框架, 后端使用Workerman + MYSQL数据库</li>
                         <li>支持弹幕聊天, 房间大厅, 在线游戏等功能, 单机可同时打开两个网页进行测试</li>
-                        <li>暂时没有实现人机对战,  欢迎加我一起讨论.</li>
+                        <li>暂时没有实现人机对战.</li>
                     </ul>
             </span>
     </div>

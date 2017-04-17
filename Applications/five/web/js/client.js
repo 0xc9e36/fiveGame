@@ -2,9 +2,9 @@
  * Created by tan on 17-3-30.
  */
 window.onload = function(){
-
-    //定义玩家信息, 棋盘信息
+    //定义玩家信息, 定时器,  棋盘信息
     var room_client_id, room_id, desk_id, client_id, color, competitor_id;
+    var timer, othertimer, t = time, o = time;
     var chessboard = document.getElementById('chessboard');
     var context = chessboard.getContext('2d');
     context.strokeStyle = "#BFBFBF";
@@ -35,7 +35,7 @@ window.onload = function(){
         color = getQueryString("color");
         // 发送登录消息
         var data = '{"type":"entry", "color":"'+color+'" ,"room_client_id":"'+room_client_id+'", "room_id":"'+room_id+'", "desk_id" : "'+desk_id+'"}';
-        console.log("websocket握手成功，发送登录数据:"+data);
+        //console.log("websocket握手成功，发送登录数据:"+data);
         ws.send(data);
     }
 
@@ -49,32 +49,25 @@ window.onload = function(){
         switch(obj.type) {
 
             //玩家进入房间
-            case 'self_entry' : //初始化名字
+            case 'self_entry' :
+                //右上角玩家具体信息设置
+                setSelf(data.client_name, data.client_logo);
 
-                //console.log(data.client_name);
-                $('.cur_name').html(data.client_name);
-                $('.detail-left').css('background-image', 'url(' + data.client_logo + ')');
-                //当前玩家信息设置
+                //左侧当前玩家信息设置
                 setPlayer(data.client_name, data.client_logo, color);
-                //console.log(data.competitor);
-
                 //如果有对手设置对手信息
                 if (data.competitor) {
                     var competitor = data.competitor;
                     //设置对手玩家信息
                     setPlayer(competitor.client_name, competitor.client_logo, competitor.color);
                 }
-                //console.log(data);
             break;
 
             //对手进入房间
             case 'competitor_entry' :
-                console.log('对手进入房间啦');
-                console.log(data);
                 var competitor = data.competitor;
                 //设置对手玩家信息
                 setPlayer(competitor.client_name, competitor.client_logo, competitor.color);
-                //console.log(data);
             break;
 
             //对手离开房间
@@ -87,14 +80,27 @@ window.onload = function(){
             //双方开始游戏
             case 'start' :
 
+                //初始化棋盘
                 context.beginPath();
                 context.clearRect(0, 0, 600, 600);
-                //绘制棋子
                 drawChessBoard();
 
-                competitor_id = data.competitor_id;
+                //初始化计时器
+                clearInterval(timer);
+                clearInterval(othertimer);
+                $('.white').find('.white_time').html(get_time(time));
+                $('.black').find('.black_time').html(get_time(time));
+                $('#time').html(get_time(time));
 
-                console.log(data.competitor);
+                t = time;
+                o = time;
+                if('black' == color) {
+                    timer = setInterval(refresh_time, 1000);//1000毫秒
+                }else {
+                    othertimer = setInterval(refresh_other_time, 1000);//1000毫秒
+                }
+
+                competitor_id = data.competitor_id;
                 layer.msg(data.msg);
             break;
 
@@ -103,6 +109,18 @@ window.onload = function(){
                 var coordinate_x = data.x;
                 var coordinate_y = data.y;
                 var black = data.color == 'black' ? true : false;
+
+                //对手页面设置
+                if(color != data.color){
+                    timer = setInterval(refresh_time, 1000);//1000毫秒
+                    clearInterval(othertimer);
+                }else{
+                    //清除自身计数器
+                    clearInterval(timer);
+                    //开始对手计时器
+                    othertimer = setInterval(refresh_other_time,1000);//1000毫秒
+                }
+
                 chess(coordinate_x, coordinate_y, black);
             break;
 
@@ -162,6 +180,7 @@ window.onload = function(){
         var send = '{"type":"play","status":"3","color":"'+color+'", "data":"'+val+'", "competitor":"'+competitor_id+'"}';
         console.log(send);
         ws.send(send);
+        //停止计时
     }
 
     //绘制棋盘
@@ -197,11 +216,18 @@ window.onload = function(){
         }
         context.fillStyle = gradient;
         context.fill();
+
+    }
+
+    //设置右上角玩家信息
+    function setSelf(client_name, client_logo){
+        $('.cur_name').html(client_name);
+        $('.detail-left').css('background-image', 'url(' + client_logo + ')');
+        $('.max_time').html(get_time(time));
     }
 
     //设置玩家信息
     function setPlayer(client_name, client_logn, color){
-        //console.log(color);
         var curBox = color == 'white' ? $('.white') : $('.black');
         var src = color == 'white' ? '../images/white-chess.png' : '../images/black-chess.png';
         curBox.find('img').attr('src', src);
@@ -227,6 +253,54 @@ window.onload = function(){
         if (r != null) return unescape(r[2]); return null;
     }
 
+    //设置定时器
+    function setTime(color, white_time, black_time){
+
+    }
+
+
+    //自己定时器设置
+    function refresh_time(){
+
+        $('#time').html(get_time(t));
+
+        if('black' == color){
+            $('.black').find('.black_time').html(get_time(t));
+        }else{
+            $('.white').find('.white_time').html(get_time(t));
+        }
+
+        t--;
+        if(t < 0){
+            //倒计时结束, 自动认输
+            clearInterval(timer);
+            var data = '{"type":"end", "time":"over"}';
+            ws.send(data);
+        }
+    }
+
+    //对手定时器设置
+    function refresh_other_time(){
+        if('black' == color){
+            $('.white').find('.white_time').html(get_time(o));
+        }else{
+            $('.black').find('.black_time').html(get_time(o));
+        }
+
+        o--;
+        if(o < 0){
+            //倒计时结束, 自动认输
+            clearInterval(othertimer);
+        }
+    }
+
+    function get_time(s){
+        var minutes = parseInt(s / 60);
+        var minutes = minutes < 10 ? '0' + minutes : minutes;
+        var seconds = parseInt(s % 60);
+        var seconds = seconds < 10 ? '0' + seconds : seconds;
+        return minutes + '-' + seconds;
+    }
     //悔棋操作
     $('#retract').click(function(){
         layer.msg('暂不支持');

@@ -8564,3 +8564,23 @@ Stack trace:
 2017-04-14 17:14:46 pid:6595 Workerman[start.php] start in DEBUG mode
 2017-04-14 17:19:04 pid:6595 Workerman[start.php] Stopping ...
 2017-04-14 17:19:04 pid:6595 Workerman[start.php] has been stopped
+2017-04-14 17:52:25 pid:12858 Workerman[start.php] start in DEBUG mode
+2017-04-14 17:54:27 pid:12858 Workerman[start.php] Stopping ...
+2017-04-14 17:54:27 pid:12858 Workerman[start.php] has been stopped
+2017-04-14 17:54:29 pid:13248 Workerman[start.php] start in DEBUG mode
+2017-04-14 18:02:39 pid:13248 Workerman[start.php] Stopping ...
+2017-04-14 18:02:39 pid:13248 Workerman[start.php] has been stopped
+2017-04-14 18:16:46 pid:17061 Workerman[start.php] start in DEBUG mode
+2017-04-14 18:18:52 pid:17061 Workerman[start.php] Stopping ...
+2017-04-14 18:18:52 pid:17061 Workerman[start.php] has been stopped
+2017-04-14 18:18:54 pid:17480 Workerman[start.php] start in DEBUG mode
+2017-04-17 09:53:27 pid:3498 Workerman[start.php] start in DEBUG mode
+2017-04-17 12:44:33 pid:3498 Workerman[start.php] Stopping ...
+2017-04-17 12:44:33 pid:3498 Workerman[start.php] has been stopped
+2017-04-17 12:44:35 pid:32542 Workerman[start.php] start in DEBUG mode
+2017-04-17 13:31:54 pid:5167 Workerman[start.php] start in DEBUG mode
+2017-04-17 17:32:39 pid:5167 Workerman[start.php] Stopping ...
+2017-04-17 17:32:39 pid:5167 Workerman[start.php] has been stopped
+2017-04-17 17:32:40 pid:12892 Workerman[start.php] start in DEBUG mode
+2017-04-17 21:18:58 pid:12892 Workerman[start.php] Stopping ...
+2017-04-17 21:18:58 pid:12892 Workerman[start.php] has been stopped
