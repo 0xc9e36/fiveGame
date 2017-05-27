@@ -13,4 +13,8 @@ workerman做的一个php五子棋, 游戏大厅, 玩家对战, 聊天功能.  �
 
    
    
-![image](https://github.com/tw1996/fiveGame/blob/master/readme-img/playing.png)  
+![image](https://github.com/tw1996/fiveGame/blob/master/readme-img/playing.png)     
+
+  
+    
+![image](https://github.com/tw1996/fiveGame/blob/master/readme-img/win.png)  
