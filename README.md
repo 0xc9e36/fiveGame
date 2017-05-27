@@ -9,3 +9,5 @@ workerman做的一个php五子棋, 游戏大厅, 玩家对战, 聊天功能.  �
 ##  演示   
 在火狐和谷歌浏览器中有效, 其他浏览器可能会被拦截弹出窗口.    
 
+![image](https://github.com/tw1996/fiveGame/blob/master/readme-img/room.png)      
+![image](https://github.com/tw1996/fiveGame/blob/master/readme-img/playing.png)  
