@@ -131,6 +131,7 @@ window.onload = function(){
 
             //玩家胜利
             case 'finish':
+                clearInterval(timer);
                 //对方逃跑则清空信息
                 if(2 == data.status)
                     clearPLayer(color);
@@ -154,7 +155,6 @@ window.onload = function(){
                         //关闭连接
                         ws.close();
                         window.opener = null;
-                        window.open('', '_self');
                         window.close()
                     },
                     'cancel': function () {

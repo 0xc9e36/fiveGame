@@ -59,6 +59,7 @@
 
     </div>
 
+
     <form class="layui-form" id="form" style="display: none"> <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
 
         <div class="layui-form-item">
@@ -209,6 +210,7 @@
                         //刷新棋桌状态
                         refresh_chess_desk(data['client_id'], data['desk_id'], data['color'], data['client_name'], data['client_logo'], true);
                     } else {
+                        winHandler.close('five');
                         layer.msg(data['content']);
                     }
                     break;
@@ -217,8 +219,8 @@
                 case 'open' :
                     //element.progress('demo', '50%');
                     url = site + data['url'];
-                    console.log(url);
-                    window.open(url, '_blank');
+                    winHandler.location.href = url;
+
             }
         }
 
@@ -340,9 +342,11 @@
             var color = 'black';
             if(desk_color == 'desk-left') color = 'white';
             var data = '{"type":"sit","desk_id":"'+desk_id+'","color":"'+color+'"}'
-            var index = layer.load(1, {time: 1000}); //1秒跳转
+            var index = layer.load(1, {time: 1000}); //延迟跳转
             setTimeout(function(){
                 ws.send(data);
+                winHandler = window.open("");
+                winHandler.name = 'five';
             }, 1000);
         });
     };

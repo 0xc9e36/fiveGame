@@ -10,8 +10,16 @@ var images = site + 'images/';          //图片服务器路径
 
 var ip = '127.0.0.1:8282';              //ip地址+端口
 
-var time = 20;                         //每局游戏时长 15分钟
+var time = 900;                         //每局游戏时长 15分钟
 
+/*
+var site = "http://game5.tw1996.com/";      //网站根目录
+
+var images = site + 'images/';          //图片服务器路径
+
+var ip = '112.74.20.150:8282';              //ip地址+端口
+
+var time = 900;                         //每局游戏时长 15分钟
 
 /************************配置房间信息*******************************/
 var room = new Array();
@@ -65,3 +73,4 @@ function CurentTime()
     clock += ss;
     return clock;
 }
+

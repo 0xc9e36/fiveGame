@@ -14,9 +14,6 @@
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-//加载配置文件
-require_once 'class/config.class.php';
-
 /**
  * 用于检测业务代码死循环或者长时间阻塞等问题
  * 如果发现业务卡死，可以将下面declare打开（去掉//注释），并执行php start.php reload
@@ -37,8 +34,8 @@ class Events{
     public static $db = null;
 
     public static function onWorkerStart($businessWorker){
-        //数据库
-        self::$db = new Workerman\MySQL\Connection('127.0.0.1', '3306', 'root', 'root', 'game');
+        $config = require_once 'config.php';
+        self::$db = new Workerman\MySQL\Connection($config['host'], $config['port'], $config['username'], $config['passwd'], $config['dbname']);
     }
 
    /**
